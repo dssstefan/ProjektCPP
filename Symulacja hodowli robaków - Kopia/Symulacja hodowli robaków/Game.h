@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
-#include <string>
+#include "Map.h"
+
+using namespace sf;
 
 class Game
 {
@@ -11,18 +12,24 @@ public:
 
 	void start();
 
-protected:
-	enum GameState {MENU, SETTINGS, PAUSE, GAME, GAME_OVER, END};
-	GameState state;
-
 private:
-	sf::RenderWindow window;
-	sf::Font font;
-	//sf::View view(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_WIDTH));
 	void draw();
 	void update(float);
-	void game(sf::RenderWindow& window);
-	void settings(sf::RenderWindow& window);
-	void menu(sf::RenderWindow& window);
+	void setMap(string);
+	void updateMap();
+
+
+	RenderWindow window;
+	View view;
+
+	int WIDTH;
+	int HEIGHT;
+
+	Texture texture[12];
+
+	Map map;
+	vector<vector<Sprite>> sprite;
+
+	Vector2f player;
 };
 

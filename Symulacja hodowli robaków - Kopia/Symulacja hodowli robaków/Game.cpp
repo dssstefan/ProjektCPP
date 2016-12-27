@@ -1,20 +1,37 @@
 #include "Game.h"
+#include <iostream>
+static const float SCRN_HEIGHT = 720.0f;
+static const float SCRN_WIDTH = 1280.0f;
+static const int TILE_SIZE = 64.0f;
+Game::Game()
+{
+	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
+	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
+	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
 
-
-
-Game::Game():
-	window(sf::VideoMode(1024, 1024), "Symulacja hodowli robaków", sf::Style::Close | sf::Style::Resize)
-{	
-	state = END;
-
-	if (!font.loadFromFile("data/AmaticSC-Regular.ttf"))
+	for (int y = 0, i = 0; y < 4; y++)
 	{
-		std::cerr << "Font not found!";
-		return;
+		for (int x = 0; x < 3; x++)
+		{
+			texture[i].loadFromFile("data/tileset.png", IntRect(Vector2i(TILE_SIZE*x, TILE_SIZE*y), Vector2i(TILE_SIZE, TILE_SIZE)));
+			i++;
+		}
 	}
-	
-	state = MENU;
-	
+
+	WIDTH = window.getSize().x / TILE_SIZE+2;
+	HEIGHT = window.getSize().y / TILE_SIZE+2;
+
+	Sprite standard(texture[0]);
+
+	sprite.resize(HEIGHT);
+	for (int y = 0; y < HEIGHT; y++)
+	{
+		sprite[y].resize(WIDTH, standard);
+	}
+
+	player = Vector2f(15*TILE_SIZE, 15*TILE_SIZE);
+
+	setMap("data/map.txt");
 }
 
 
@@ -24,99 +41,156 @@ Game::~Game()
 
 void Game::start()
 {
-	while (state != END)
+	Time lastUpdate = Time::Zero;
+	Clock time;
+
+	while (window.isOpen())
 	{
-		
-		switch (state)
+		Event event;
+		while (window.pollEvent(event))
 		{
-		case GameState::MENU:
-			menu(window);
-			break;
-		case GameState::GAME:
-			game(window);
-			break;
-		case GameState::SETTINGS:
-			settings(window);
-			break;
+			if (event.type == Event::Closed)
+				window.close();
+			if (event.type == Event::KeyPressed)
+			{
+				if (event.key.code == Keyboard::Left)
+				{
+					player.x -= TILE_SIZE;
+					view.move(-TILE_SIZE, 0);
+				}
+				else if (event.key.code == Keyboard::Right)
+				{
+					player.x += TILE_SIZE;
+					view.move(TILE_SIZE, 0);
+				}
+				else if (event.key.code == Keyboard::Up)
+				{
+					player.y -= TILE_SIZE;
+					view.move(0, -TILE_SIZE);
+				}
+				else if (event.key.code == Keyboard::Down)
+				{
+					player.y += TILE_SIZE;
+					view.move(0, TILE_SIZE);
+				}
+				updateMap();
+				window.setView(view);
+			}
 		}
+
+		float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+		update(deltaTime);
+
+		lastUpdate = time.getElapsedTime();
+		draw();
 	}
 
 }
-
 
 void Game::draw()
 {
-}
+	window.clear();
 
-void Game::update(float)
-{
-}
-
-void Game::game(sf::RenderWindow & window)
-{
-}
-
-void Game::settings(sf::RenderWindow & window)
-{
-}
-
-void Game::menu(sf::RenderWindow& window)
-{
-	sf::Vector2u windowSize = window.getSize();
-	sf::Text title("Symulacja Hodowli Robaków", font, 80);
-	title.setStyle(sf::Text::Bold);
-
-	title.setPosition(windowSize.x/ 2 - title.getGlobalBounds().width / 2, 20);
-
-	const int number = 3;
-	
-	sf::Text text[number];
-
-	std::string str[] = { "Start", "Ustawienia", "Wyjscie" };
-
-	for (int i = 0; i < number; i++)
+	for (int y = 0; y < HEIGHT; y++)
 	{
-		text[i].setFont(font);
-		text[i].setCharacterSize(65);
-		text[i].setString(str[i]);
-		text[i].setPosition(windowSize.x/2 - text[i].getGlobalBounds().width / 2, 2 * windowSize.y / 7 + i * 120);
+		for (int x = 0; x < WIDTH; x++)
+			window.draw(sprite[y][x]);
 	}
 
-	while (state == MENU)
-	{
-		sf::Vector2f mouse(sf::Mouse::getPosition(window));
-		sf::Event event;
+	window.display();
+}
 
-		while (window.pollEvent(event))
+void Game::update(float deltaTime)
+{
+	std::cout << deltaTime << std::endl;
+}
+
+void Game::setMap(string)
+{
+	if (!map.loadFromFile())
+	{
+		cout << "Problem z za³adowaniem mapy!";
+		return;
+	}
+
+	updateMap();
+	window.setView(view);
+}
+
+void Game::updateMap()
+{
+	Vector2i fixed(player.x / TILE_SIZE, player.y / TILE_SIZE);
+	view.setCenter(fixed.x*TILE_SIZE + TILE_SIZE / 2, fixed.y*TILE_SIZE + TILE_SIZE / 2);
+
+	Vector2f min = Vector2f(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2);
+	int leftBorder = min.x / TILE_SIZE;
+	int rightBorder = leftBorder + WIDTH - 2;
+
+	if (min.x < 0)
+	{
+		int difference = abs(min.x);
+		min.x += difference;
+		view.move(difference, 0);
+
+		leftBorder = min.x / TILE_SIZE;
+	}
+	else if (leftBorder > 0 && rightBorder - 1 < map.getWidth() - 1)
+	{
+		min.x -= TILE_SIZE;
+		view.move(-TILE_SIZE, 0);
+		leftBorder = min.x / TILE_SIZE;
+	}
+	else if (rightBorder - 1 >= map.getWidth() - 1)
+	{
+		int difference = view.getCenter().x + view.getSize().x / 2 - (map.getWidth() - 1)*TILE_SIZE;
+
+		difference = -difference - TILE_SIZE;
+		min.x += difference;
+
+		leftBorder = min.x / TILE_SIZE;
+		view.setCenter((leftBorder + (WIDTH) / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
+	}
+	else if (leftBorder == 0)
+		view.move(-TILE_SIZE / 2, 0);
+
+	int upBorder = min.y / TILE_SIZE;
+	int bottomBorder = upBorder + HEIGHT - 2;
+
+	if (min.y < 0)
+	{
+		int difference = abs(min.y);
+		min.y += difference;
+		view.move(difference, 0);
+
+		upBorder = min.y / TILE_SIZE;
+	}
+	else if (upBorder > 0 && bottomBorder - 1 < map.getHeight() - 1)
+	{
+		min.y -= TILE_SIZE;
+		view.move(0,-TILE_SIZE);
+		upBorder = min.y / TILE_SIZE;
+	}
+	else if (bottomBorder - 1 >= map.getHeight() - 1)
+	{
+		int difference = view.getCenter().y + view.getSize().y / 2 - (map.getHeight() - 1)*TILE_SIZE;
+
+		difference = -difference - TILE_SIZE;
+		min.y += difference;
+
+		upBorder = min.y / TILE_SIZE;
+		view.setCenter(view.getCenter().x ,(upBorder + (HEIGHT) / 2)*TILE_SIZE + TILE_SIZE);
+	}
+	else if (upBorder == 0)
+		view.move(-TILE_SIZE / 2, 0);
+
+	for (int y = 0, h = upBorder; y < HEIGHT; y++)
+	{
+		for (int x = 0, v = leftBorder; x < WIDTH; x++)
 		{
-			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-			{
-				state = END;
-			}
-			else if (text[2].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased  && event.key.code == sf::Mouse::Left)
-			{
-				state = END;
-			}
-
-			if (text[0].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased  && event.key.code == sf::Mouse::Left)
-				game(window);
-
-			if (text[1].getGlobalBounds().contains(mouse) && event.type == sf::Event::MouseButtonReleased  && event.key.code == sf::Mouse::Left)
-				settings(window);
+			sprite[y][x].setPosition(v*TILE_SIZE, h*TILE_SIZE);
+			sprite[y][x].setTexture(texture[map.map[h][v].type]);
+			v++;
 		}
-
-		for (int i = 0; i < number; i++)
-			if (text[i].getGlobalBounds().contains(mouse))
-				text[i].setFillColor(sf::Color::Green);
-			else
-				text[i].setFillColor(sf::Color::White);
-
-		window.clear();
-
-		window.draw(title);
-		for (int i = 0; i < number; i++)
-		window.draw(text[i]);
-		window.display();
+		h++;
 	}
-
 }
