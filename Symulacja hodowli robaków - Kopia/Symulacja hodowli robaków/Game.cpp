@@ -191,7 +191,7 @@ void Game::updateMap()
 		for (int x = 0, v = leftBorder; x < WIDTH; x++)
 		{
 			sprite[y][x].setPosition(v*TILE_SIZE, h*TILE_SIZE);
-			sprite[y][x].setTexture(texture[map.map[h][v].type]);
+			sprite[y][x].setTexture(texture[map.tilemap[h][v].type]);
 			v++;
 		}
 		h++;

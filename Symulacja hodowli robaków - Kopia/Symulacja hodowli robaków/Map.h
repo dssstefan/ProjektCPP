@@ -26,7 +26,7 @@ public:
 		bool interactable;
 	};
 
-	vector < vector <Tile > > map;
+	vector < vector <Tile > > tilemap;
 private:
 	unsigned short width;
 	unsigned short height;

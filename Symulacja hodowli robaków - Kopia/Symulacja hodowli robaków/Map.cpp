@@ -29,11 +29,11 @@ bool Map::loadFromFile()
 		return false;
 	}
 
-	map.resize(height);
+	tilemap.resize(height);
 
 	for (int i = 0; i < height; i++)
 	{
-		map[i].resize(width);
+		tilemap[i].resize(width);
 	}
 
 	for (int y = 0; y < height; y++)
@@ -42,7 +42,7 @@ bool Map::loadFromFile()
 		{
 			short buffer;
 			file >> buffer;
-			map[y][x] = getTile(buffer);
+			tilemap[y][x] = getTile(buffer);
 		}
 
 	}
