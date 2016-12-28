@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Map.h"
+#include "Spider.h"
 
 using namespace sf;
 
@@ -31,5 +32,9 @@ private:
 	vector<vector<Sprite>> sprite;
 
 	Vector2f camera;
+
+	Spider spider;
+	Texture tSpider;
+
 };
 

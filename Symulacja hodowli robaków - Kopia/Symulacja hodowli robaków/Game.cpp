@@ -3,6 +3,7 @@
 static const float SCRN_HEIGHT = 720.0f;
 static const float SCRN_WIDTH = 1280.0f;
 static const int TILE_SIZE = 64.0f;
+
 Game::Game()
 {
 	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
@@ -32,6 +33,13 @@ Game::Game()
 	camera = Vector2f((WIDTH/2)*TILE_SIZE, (HEIGHT/2)*TILE_SIZE);
 
 	setMap("data/map.txt");
+
+	tSpider.loadFromFile("data/spider03.png");
+	
+	srand(time(NULL));
+	spider.setPosition(rand() % WIDTH * TILE_SIZE, rand() % HEIGHT * TILE_SIZE);
+	spider.setTexture(tSpider);
+
 }
 
 
@@ -96,6 +104,8 @@ void Game::draw()
 		for (int x = 0; x < WIDTH; x++)
 			window.draw(sprite[y][x]);
 	}
+
+	spider.draw(window);
 
 	window.display();
 }
