@@ -29,7 +29,7 @@ Game::Game()
 		sprite[y].resize(WIDTH, standard);
 	}
 
-	player = Vector2f(15*TILE_SIZE, 15*TILE_SIZE);
+	camera = Vector2f((WIDTH/2)*TILE_SIZE, (HEIGHT/2)*TILE_SIZE);
 
 	setMap("data/map.txt");
 }
@@ -55,22 +55,22 @@ void Game::start()
 			{
 				if (event.key.code == Keyboard::Left)
 				{
-					player.x -= TILE_SIZE;
+					camera.x -= TILE_SIZE;
 					view.move(-TILE_SIZE, 0);
 				}
 				else if (event.key.code == Keyboard::Right)
 				{
-					player.x += TILE_SIZE;
+					camera.x += TILE_SIZE;
 					view.move(TILE_SIZE, 0);
 				}
 				else if (event.key.code == Keyboard::Up)
 				{
-					player.y -= TILE_SIZE;
+					camera.y -= TILE_SIZE;
 					view.move(0, -TILE_SIZE);
 				}
 				else if (event.key.code == Keyboard::Down)
 				{
-					player.y += TILE_SIZE;
+					camera.y += TILE_SIZE;
 					view.move(0, TILE_SIZE);
 				}
 				updateMap();
@@ -119,7 +119,7 @@ void Game::setMap(string)
 
 void Game::updateMap()
 {
-	Vector2i fixed(player.x / TILE_SIZE, player.y / TILE_SIZE);
+	Vector2i fixed(camera.x / TILE_SIZE, camera.y / TILE_SIZE);
 	view.setCenter(fixed.x*TILE_SIZE + TILE_SIZE / 2, fixed.y*TILE_SIZE + TILE_SIZE / 2);
 
 	Vector2f min = Vector2f(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2);
@@ -148,7 +148,7 @@ void Game::updateMap()
 		min.x += difference;
 
 		leftBorder = min.x / TILE_SIZE;
-		view.setCenter((leftBorder + (WIDTH) / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
+		view.setCenter((leftBorder + WIDTH / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
 	}
 	else if (leftBorder == 0)
 		view.move(-TILE_SIZE / 2, 0);
@@ -160,7 +160,7 @@ void Game::updateMap()
 	{
 		int difference = abs(min.y);
 		min.y += difference;
-		view.move(difference, 0);
+		view.move(0, difference);
 
 		upBorder = min.y / TILE_SIZE;
 	}
@@ -178,10 +178,13 @@ void Game::updateMap()
 		min.y += difference;
 
 		upBorder = min.y / TILE_SIZE;
-		view.setCenter(view.getCenter().x ,(upBorder + (HEIGHT) / 2)*TILE_SIZE + TILE_SIZE);
+		view.setCenter(view.getCenter().x ,(upBorder + HEIGHT / 2)*TILE_SIZE + TILE_SIZE);
+
+		if (bottomBorder - 1 == map.getHeight() - 1)		
+			view.move(0, -TILE_SIZE / 2);
 	}
 	else if (upBorder == 0)
-		view.move(-TILE_SIZE / 2, 0);
+		view.move(0, -TILE_SIZE /2);
 
 	for (int y = 0, h = upBorder; y < HEIGHT; y++)
 	{

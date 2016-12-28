@@ -30,6 +30,6 @@ private:
 	Map map;
 	vector<vector<Sprite>> sprite;
 
-	Vector2f player;
+	Vector2f camera;
 };
 
