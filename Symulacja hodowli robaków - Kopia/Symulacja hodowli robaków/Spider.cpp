@@ -16,12 +16,12 @@ Spider::~Spider()
 {
 }
 
-void Spider::move(int x, int y)
+void Spider::move(float x, float y)
 {
 	sprite.move(x, y);
 }
 
-void Spider::setPosition(int x, int y)
+void Spider::setPosition(float x, float y)
 {
 	sprite.setPosition(x, y);
 }

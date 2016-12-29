@@ -7,8 +7,8 @@ public:
 	Spider();
 	~Spider();
 
-	void move(int x, int y);
-	void setPosition(int x, int y);
+	void move(float x, float y);
+	void setPosition(float x, float y);
 	void setTexture(sf::Texture &);
 	void setTextureRect(sf::IntRect);
 	void draw(sf::RenderWindow &);

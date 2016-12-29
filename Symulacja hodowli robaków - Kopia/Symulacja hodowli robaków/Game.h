@@ -3,6 +3,9 @@
 #include "Map.h"
 #include "Spider.h"
 #include "CreateSpiders.h"
+#include "UpdateSpider.h"
+
+
 using namespace sf;
 
 class Game
@@ -36,5 +39,7 @@ private:
 	CreateSpiders createSpiders;
 	vector <Spider> spiderM;
 	vector <Spider> spiderF;
+
+	UpdateSpider updatespider;
 };
 

@@ -3,6 +3,7 @@
 #include "const.h"
 
 Game::Game()
+	:updatespider(100.0f)
 {
 	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -33,7 +34,7 @@ Game::Game()
 	setMap("data/map.txt");
 
 	createSpiders.createSpiders(spiderM, spiderF, map.getWidth(), map.getHeight());
-
+	
 }
 
 
@@ -110,7 +111,9 @@ void Game::draw()
 
 void Game::update(float deltaTime)
 {
-	std::cout << deltaTime << std::endl;
+	//std::cout << deltaTime << std::endl;
+	updatespider.update(spiderM, deltaTime);
+	updatespider.update(spiderF, deltaTime);
 }
 
 void Game::setMap(string)
