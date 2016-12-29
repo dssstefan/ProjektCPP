@@ -27,6 +27,9 @@
     <ClCompile Include="Spider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CreateSpiders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -36,6 +39,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Spider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CreateSpiders.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="const.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

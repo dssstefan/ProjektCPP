@@ -1,8 +1,6 @@
 #include "Game.h"
 #include <iostream>
-static const float SCRN_HEIGHT = 720.0f;
-static const float SCRN_WIDTH = 1280.0f;
-static const int TILE_SIZE = 64.0f;
+#include "const.h"
 
 Game::Game()
 {
@@ -34,11 +32,7 @@ Game::Game()
 
 	setMap("data/map.txt");
 
-	tSpider.loadFromFile("data/spider03.png");
-	
-	srand(time(NULL));
-	spider.setPosition(rand() % WIDTH * TILE_SIZE, rand() % HEIGHT * TILE_SIZE);
-	spider.setTexture(tSpider);
+	createSpiders.createSpiders(spiderM, spiderF, map.getWidth(), map.getHeight());
 
 }
 
@@ -105,7 +99,11 @@ void Game::draw()
 			window.draw(sprite[y][x]);
 	}
 
-	spider.draw(window);
+	for (int i = 0; i < 15; i++)
+	{
+		spiderM[i].draw(window);
+		spiderF[i].draw(window);
+	}
 
 	window.display();
 }
