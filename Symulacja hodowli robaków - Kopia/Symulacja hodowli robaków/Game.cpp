@@ -3,7 +3,7 @@
 #include "const.h"
 
 Game::Game()
-	:updatespider(100.0f)
+	:updatespider(1.0f)
 {
 	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -111,9 +111,10 @@ void Game::draw()
 
 void Game::update(float deltaTime)
 {
+	
 	//std::cout << deltaTime << std::endl;
-	updatespider.update(spiderM, deltaTime);
-	updatespider.update(spiderF, deltaTime);
+	updatespider.update(spiderM, deltaTime, map);
+	updatespider.update(spiderF, deltaTime, map);
 }
 
 void Game::setMap(string)

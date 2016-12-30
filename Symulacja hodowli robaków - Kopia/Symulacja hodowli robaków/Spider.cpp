@@ -9,6 +9,10 @@ Spider::Spider()
 	isMale = true;
 	textureSize.x = 0;
 	textureSize.y = 0;
+	count = 0;
+	random = 0;
+	movement.x = 0;
+	movement.y = 0;
 }
 
 
@@ -35,6 +39,28 @@ void Spider::setTexture(sf::Texture &t)
 void Spider::setTextureRect(sf::IntRect Rect)
 {
 	sprite.setTextureRect(Rect);
+}
+
+void Spider::setMovement(float x, float y)
+{
+	movement.x += x;
+	movement.y += y;
+
+	if (movement.x > 5)
+		movement.x = 5;
+	else if (movement.x < -5)
+		movement.x = -5;
+	
+	if (movement.y > 5)
+		movement.y = 5;
+	else if (movement.y < -5)
+		movement.y = -5;
+
+}
+
+sf::Vector2f Spider::getMovement()
+{
+	return movement;
 }
 
 void Spider::draw(sf::RenderWindow &window)

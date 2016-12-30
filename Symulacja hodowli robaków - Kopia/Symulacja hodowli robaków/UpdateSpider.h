@@ -2,6 +2,8 @@
 #include <SFML\Graphics.hpp>
 #include "Spider.h"
 #include <vector>
+#include "const.h"
+#include "Map.h"
 
 using namespace sf;
 using namespace std;
@@ -11,7 +13,7 @@ public:
 	UpdateSpider(float speed);
 	~UpdateSpider();
 
-	void update(vector <Spider> &spider, float deltaTime);
+	void update(vector <Spider> &spider, float deltaTime, Map map);
 
 	enum Position {
 		LEFT, UP, RIGHT, DOWN
@@ -21,6 +23,9 @@ public:
 	Vector2f movement;
 
 private:
+	void moveSpider(vector <Spider> &spider, float deltaTime, Map map);
+	void checkCollision(Spider spider, Map map);
+
 	float speed;
 };
 
