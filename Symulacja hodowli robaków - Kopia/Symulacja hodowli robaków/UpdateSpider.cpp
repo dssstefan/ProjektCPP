@@ -64,28 +64,41 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 		default:
 			break;
 		}
-		spider[i].setMovement(movement.x, movement.y);
-		movement = spider[i].getMovement();
-
+		spider[i].addMovement(movement.x, movement.y);
 		checkCollision(spider[i], map);
+
+		movement = spider[i].getMovement();
 		spider[i].move(movement.x, movement.y);
 
 	}
 }
 
-void UpdateSpider::checkCollision(Spider spider, Map map)
+void UpdateSpider::checkCollision(Spider& spider, Map map)
 {
 	Vector2f movement = spider.getMovement();
 	Vector2f nextPos(spider.getX() + movement.x, spider.getY() + movement.y);
 
+	if (nextPos.x <= 0.0f)
+	{
+		spider.setMovement(-movement.x, movement.y);
+	}
+	else if (nextPos.x >= map.getWidth()*TILE_SIZE - 64)
+	{
+		spider.setMovement(-movement.x, movement.y);
+	}
 
-	if (nextPos.x < 0)
-		spider.setMovement(0.0f, movement.y);
-	else if(nextPos.x > map.getWidth()*TILE_SIZE)
-		spider.setMovement(map.getWidth()*TILE_SIZE, movement.y);
+	if (nextPos.y <= 0.0f)
+	{
+		spider.setMovement(movement.x, -movement.y);
+	}
+	else if (nextPos.y >= map.getHeight()*TILE_SIZE -64)
+	{
+		spider.setMovement(movement.x, -movement.y);
+	}
 
-	if (nextPos.y < 0)
-		spider.setMovement(movement.x, 0.0f);
-	else if (nextPos.y > map.getHeight()*TILE_SIZE)
-		spider.setMovement(movement.x, map.getHeight()*TILE_SIZE);
+	for (int i = 0; i < map.tileMapColl.size(); i++)
+	{
+		
+	}
+
 }

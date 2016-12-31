@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "const.h"
 
 using namespace std;
 
@@ -14,10 +15,7 @@ public:
 	bool loadFromFile();
 	unsigned short getWidth();
 	unsigned short getHeight();
-	enum TileType {
-		GRASS_1, SAND_1, SAND_2, GRASS_2, GRASS_3, GRASS_4, 
-		GRASS_5, GRASS_6, GRASS_7, GRASS_8, GRASS_9, BUSH
-	};
+	
 
 	struct Tile {
 		TileType type;
@@ -26,7 +24,9 @@ public:
 		bool interactable;
 	};
 
-	vector < vector <Tile > > tilemap;
+	vector < vector <Tile > > tileMap;
+	vector <Tile > tileMapColl;
+	vector <Tile > tileMapInt;
 private:
 	unsigned short width;
 	unsigned short height;

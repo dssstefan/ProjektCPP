@@ -3,7 +3,7 @@
 #include "const.h"
 
 Game::Game()
-	:updatespider(1.0f)
+	:updatespider(10.0f)
 {
 	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -203,7 +203,7 @@ void Game::updateMap()
 		for (int x = 0, v = leftBorder; x < WIDTH; x++)
 		{
 			sprite[y][x].setPosition(v*TILE_SIZE, h*TILE_SIZE);
-			sprite[y][x].setTexture(texture[map.tilemap[h][v].type]);
+			sprite[y][x].setTexture(texture[map.tileMap[h][v].type]);
 			v++;
 		}
 		h++;

@@ -15,16 +15,12 @@ public:
 
 	void update(vector <Spider> &spider, float deltaTime, Map map);
 
-	enum Position {
-		LEFT, UP, RIGHT, DOWN
-	};
-
 	Position position;
 	Vector2f movement;
 
 private:
 	void moveSpider(vector <Spider> &spider, float deltaTime, Map map);
-	void checkCollision(Spider spider, Map map);
+	void checkCollision(Spider &spider, Map map);
 
 	float speed;
 };

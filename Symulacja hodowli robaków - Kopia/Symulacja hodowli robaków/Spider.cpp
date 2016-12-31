@@ -41,21 +41,37 @@ void Spider::setTextureRect(sf::IntRect Rect)
 	sprite.setTextureRect(Rect);
 }
 
-void Spider::setMovement(float x, float y)
+void Spider::addMovement(float x, float y)
 {
 	movement.x += x;
 	movement.y += y;
 
-	if (movement.x > 5)
-		movement.x = 5;
-	else if (movement.x < -5)
-		movement.x = -5;
+	if (movement.x > 1)
+		movement.x = 1;
+	else if (movement.x < -1)
+		movement.x = -1;
 	
-	if (movement.y > 5)
-		movement.y = 5;
-	else if (movement.y < -5)
-		movement.y = -5;
+	if (movement.y > 1)
+		movement.y = 1;
+	else if (movement.y < -1)
+		movement.y = -1;
 
+}
+
+void Spider::setMovement(float x, float y)
+{
+	movement.x = x;
+	movement.y = y;
+
+	if (movement.x > 1)
+		movement.x = 1;
+	else if (movement.x < -1)
+		movement.x = -1;
+
+	if (movement.y > 1)
+		movement.y = 1;
+	else if (movement.y < -1)
+		movement.y = -1;
 }
 
 sf::Vector2f Spider::getMovement()

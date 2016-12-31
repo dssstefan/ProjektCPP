@@ -11,6 +11,7 @@ public:
 	void setPosition(float x, float y);
 	void setTexture(sf::Texture &t);
 	void setTextureRect(sf::IntRect);
+	void addMovement(float x, float y);
 	void setMovement(float x, float y);
 	sf::Vector2f getMovement();
 	void draw(sf::RenderWindow &);

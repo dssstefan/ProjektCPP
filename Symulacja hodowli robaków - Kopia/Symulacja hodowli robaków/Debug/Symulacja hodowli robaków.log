@@ -1,6 +1,5 @@
 ﻿  UpdateSpider.cpp
 c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\const.h(4): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\updatespider.cpp(85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\updatespider.cpp(90): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\updatespider.cpp(99): warning C4018: '<': signed/unsigned mismatch
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

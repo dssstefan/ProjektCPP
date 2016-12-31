@@ -17,7 +17,8 @@ bool Map::loadFromFile()
 {
 	fstream file;
 	file.open("data/map.txt");
-
+	int coll = 0;
+	int inter = 0;
 	if (!file.is_open())
 		return false;
 
@@ -29,11 +30,11 @@ bool Map::loadFromFile()
 		return false;
 	}
 
-	tilemap.resize(height);
+	tileMap.resize(height);
 
 	for (int i = 0; i < height; i++)
 	{
-		tilemap[i].resize(width);
+		tileMap[i].resize(width);
 	}
 
 	for (int y = 0; y < height; y++)
@@ -42,7 +43,21 @@ bool Map::loadFromFile()
 		{
 			short buffer;
 			file >> buffer;
-			tilemap[y][x] = getTile(buffer);
+			tileMap[y][x] = getTile(buffer);
+
+			if (getTile(buffer).collideable)
+			{
+				coll++;
+				tileMapColl.resize(coll);
+				tileMapColl[coll - 1] = getTile(buffer);
+			}
+
+			if (getTile(buffer).interactable)
+			{
+				inter++;
+				tileMapInt.resize(inter);
+				tileMapInt[inter - 1] = getTile(buffer);
+			}
 		}
 
 	}
@@ -68,15 +83,15 @@ Map::Tile Map::getTile(short code)
 
 	switch (TileType(code))
 	{
-	case Map::SAND_1:
+	case SAND_1:
 		tile.collideable = false;
 		tile.interactable = false;
 		break;
-	case Map::SAND_2:
+	case SAND_2:
 		tile.collideable = false;
 		tile.interactable = false;
 		break;
-	case Map::BUSH:
+	case BUSH:
 		tile.collideable = true;
 		tile.interactable = false;
 		break;
