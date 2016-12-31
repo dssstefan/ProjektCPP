@@ -49,14 +49,20 @@ bool Map::loadFromFile()
 			{
 				coll++;
 				tileMapColl.resize(coll);
-				tileMapColl[coll - 1] = getTile(buffer);
+				tileMapColl[coll - 1].type = getTile(buffer).type;
+				tileMapColl[coll - 1].collideable = true;
+				tileMapColl[coll - 1].position.x = x * TILE_SIZE;
+				tileMapColl[coll - 1].position.y = y * TILE_SIZE;
 			}
 
 			if (getTile(buffer).interactable)
 			{
 				inter++;
 				tileMapInt.resize(inter);
-				tileMapInt[inter - 1] = getTile(buffer);
+				tileMapInt[coll - 1].type = getTile(buffer).type;
+				tileMapInt[coll - 1].interactable = true;
+				tileMapInt[coll - 1].position.x = x * TILE_SIZE;
+				tileMapInt[coll - 1].position.y = y * TILE_SIZE;
 			}
 		}
 

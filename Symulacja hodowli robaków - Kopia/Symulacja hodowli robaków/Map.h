@@ -1,11 +1,12 @@
 #pragma once
+#include <SFML\Graphics.hpp>
 #include <iostream>
 #include <string>
 #include <vector>
 #include "const.h"
 
 using namespace std;
-
+using namespace sf;
 class Map
 {
 public:
@@ -16,6 +17,20 @@ public:
 	unsigned short getWidth();
 	unsigned short getHeight();
 	
+	struct TileC {
+		TileType type;
+
+		bool collideable;
+		Vector2f position;
+	};
+
+	struct TileI {
+		TileType type;
+
+		bool interactable;
+		Vector2f position;
+	};
+
 
 	struct Tile {
 		TileType type;
@@ -25,8 +40,8 @@ public:
 	};
 
 	vector < vector <Tile > > tileMap;
-	vector <Tile > tileMapColl;
-	vector <Tile > tileMapInt;
+	vector <TileC > tileMapColl;
+	vector <TileI > tileMapInt;
 private:
 	unsigned short width;
 	unsigned short height;
