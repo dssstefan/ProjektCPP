@@ -17,8 +17,7 @@ bool Map::loadFromFile()
 {
 	fstream file;
 	file.open("data/map.txt");
-	int coll = 0;
-	int inter = 0;
+
 	if (!file.is_open())
 		return false;
 
@@ -45,25 +44,6 @@ bool Map::loadFromFile()
 			file >> buffer;
 			tileMap[y][x] = getTile(buffer);
 
-			if (getTile(buffer).collideable)
-			{
-				coll++;
-				tileMapColl.resize(coll);
-				tileMapColl[coll - 1].type = getTile(buffer).type;
-				tileMapColl[coll - 1].collideable = true;
-				tileMapColl[coll - 1].position.x = x * TILE_SIZE;
-				tileMapColl[coll - 1].position.y = y * TILE_SIZE;
-			}
-
-			if (getTile(buffer).interactable)
-			{
-				inter++;
-				tileMapInt.resize(inter);
-				tileMapInt[coll - 1].type = getTile(buffer).type;
-				tileMapInt[coll - 1].interactable = true;
-				tileMapInt[coll - 1].position.x = x * TILE_SIZE;
-				tileMapInt[coll - 1].position.y = y * TILE_SIZE;
-			}
 		}
 
 	}

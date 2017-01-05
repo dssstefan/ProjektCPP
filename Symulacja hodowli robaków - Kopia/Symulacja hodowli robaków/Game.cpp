@@ -111,10 +111,32 @@ void Game::draw()
 
 void Game::update(float deltaTime)
 {
-	
+	float push = 0.0f;
 	//std::cout << deltaTime << std::endl;
 	updatespider.update(spiderM, deltaTime, map);
 	updatespider.update(spiderF, deltaTime, map);
+
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{	
+			if (i == j) {
+				continue;
+			}
+			spiderM[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
+			spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
+			
+		}
+
+		for (int a = 0; a < 15; a++)
+		{
+			if (i == a) {
+				continue;
+			}
+			spiderF[i].getCollider().CheckCollision(spiderM[a].getCollider(), 0.0f);
+			spiderF[i].getCollider().CheckCollision(spiderF[a].getCollider(), 0.0f);
+		}
+	}
 }
 
 void Game::setMap(string)

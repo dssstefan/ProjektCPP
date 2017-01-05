@@ -1,5 +1,27 @@
-﻿  UpdateSpider.cpp
+﻿  Game.cpp
 c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\const.h(4): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\updatespider.cpp(99): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(8): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(32): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(67): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(77): warning C4244: 'argument': conversion from 'const int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(156): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(157): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(160): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(165): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(167): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(169): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(175): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(179): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(184): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(185): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(190): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(195): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(197): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(199): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(205): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(209): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(214): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(215): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\game.cpp(227): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

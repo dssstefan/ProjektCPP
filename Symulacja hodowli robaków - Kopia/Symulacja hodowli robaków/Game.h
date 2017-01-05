@@ -5,7 +5,7 @@
 #include "CreateSpiders.h"
 #include "UpdateSpider.h"
 
-
+using namespace std;
 using namespace sf;
 
 class Game

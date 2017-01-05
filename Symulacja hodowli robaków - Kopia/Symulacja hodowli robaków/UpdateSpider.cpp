@@ -65,15 +65,16 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 			break;
 		}
 		spider[i].addMovement(movement.x, movement.y);
-		checkCollision(spider[i], map);
+		checkBorderCollision(spider[i], map);
 
 		movement = spider[i].getMovement();
 		spider[i].move(movement.x, movement.y);
 
+
 	}
 }
 
-void UpdateSpider::checkCollision(Spider& spider, Map map)
+void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 {
 	Vector2f movement = spider.getMovement();
 	Vector2f nextPos(spider.getX() + movement.x, spider.getY() + movement.y);
@@ -96,9 +97,6 @@ void UpdateSpider::checkCollision(Spider& spider, Map map)
 		spider.setMovement(movement.x, -movement.y);
 	}
 
-	for (int i = 0; i < map.tileMapColl.size(); i++)
-	{
-		
-	}
+
 
 }

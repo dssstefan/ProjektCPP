@@ -15,7 +15,6 @@ Spider::Spider()
 	movement.y = 0;
 }
 
-
 Spider::~Spider()
 {
 }
@@ -98,3 +97,15 @@ float Spider::getY()
 {
 	return sprite.getPosition().y;
 }
+
+FloatRect Spider::getGlobalBounds()
+{
+	return sprite.getGlobalBounds();
+}
+
+Collider Spider::getCollider()
+{
+	return Collider(sprite);
+}
+
+

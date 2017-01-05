@@ -20,7 +20,7 @@ public:
 
 private:
 	void moveSpider(vector <Spider> &spider, float deltaTime, Map map);
-	void checkCollision(Spider &spider, Map map);
+	void checkBorderCollision(Spider &spider, Map map);
 
 	float speed;
 };
