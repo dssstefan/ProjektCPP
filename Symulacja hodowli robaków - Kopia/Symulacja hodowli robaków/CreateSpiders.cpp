@@ -33,10 +33,12 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 		spiderM[i].textureSize.x /= 7;
 		spiderM[i].textureSize.y /= 5;
 		spiderM[i].setTextureRect(sf::IntRect(spiderM[i].textureSize.x * 0, spiderM[i].textureSize.y * 2, spiderM[i].textureSize.x, spiderM[i].textureSize.y));
+		spiderM[i].animation.setAnimation(&tSpiderM, Vector2u(7, 5), 0.03f);
 
 		spiderF[i].textureSize = tSpiderF.getSize();
 		spiderF[i].textureSize.x /= 7;
 		spiderF[i].textureSize.y /= 5;
 		spiderF[i].setTextureRect(sf::IntRect(spiderF[i].textureSize.x * 0, spiderF[i].textureSize.y * 2, spiderF[i].textureSize.x, spiderF[i].textureSize.y));
+		spiderF[i].animation.setAnimation(&tSpiderF, Vector2u(7, 5), 0.03f);
 	}
 }

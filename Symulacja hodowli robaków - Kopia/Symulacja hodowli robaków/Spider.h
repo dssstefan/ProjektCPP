@@ -26,6 +26,7 @@ public:
 	Collider getCollider();
 	FloatRect getGlobalBounds();
 	Vector2u textureSize;
+	Animation animation;
 	int count;
 	int random;
 private:
@@ -33,8 +34,6 @@ private:
 	int size;
 	bool isMale;
 	Vector2f movement;
-	Animation animation;
-	
 
 	Texture *texture;
 	Sprite sprite;

@@ -27,7 +27,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 
 	std::random_device generator;
 	std::uniform_int_distribution<int> distribution(1, 4);
-	std::uniform_int_distribution<int> distribution2(1, 400);
+	std::uniform_int_distribution<int> distribution2(1, 200);
 	int random = 0;
 	for (int i = 0; i < 15; i++)
 	{
@@ -42,7 +42,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 
 			random = distribution2(generator);
 			spider[i].count = random;
-
+			
 		}
 		else
 			spider[i].count--;
@@ -72,6 +72,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 	
 
 	}
+
 }
 
 void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
@@ -87,8 +88,7 @@ void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 	{
 		spider.setMovement(-movement.x, movement.y);
 	}
-
-	if (nextPos.y <= 0.0f)
+	else if (nextPos.y <= 0.0f)
 	{
 		spider.setMovement(movement.x, -movement.y);
 	}
@@ -106,12 +106,12 @@ Face UpdateSpider::checkFace(Vector2f movement)
 	if (movement.y >= movement.x && movement.y >= -movement.x)
 		return UP;
 
-	if (movement.y < movement.x && movement.y > -movement.x)
-		return RIGHT;
+	if (movement.y > movement.x && movement.y < -movement.x)
+		return LEFT;
 
 	if (movement.y <= movement.x && movement.y <= -movement.x)
 		return DOWN;
 
-	if (movement.y > movement.x && movement.y < -movement.x)
-		return LEFT;
+	if (movement.y < movement.x && movement.y > -movement.x)
+		return RIGHT;
 }

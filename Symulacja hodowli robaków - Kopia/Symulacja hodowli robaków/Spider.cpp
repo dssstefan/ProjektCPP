@@ -2,8 +2,7 @@
 
 
 
-Spider::Spider():
-	animation(texture, Vector2u(5,7), 0.3f)
+Spider::Spider()
 {
 	hp = 30;
 	texture = NULL;
