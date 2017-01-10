@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Collider.h"
+#include "Animation.h"
+
 using namespace sf;
 
 class Spider
@@ -9,6 +11,7 @@ public:
 	Spider();
 	~Spider();
 
+	void move(float x, float y, float deltTime, Face face);
 	void move(float x, float y);
 	void setPosition(float x, float y);
 	void setTexture(sf::Texture &t);
@@ -30,6 +33,8 @@ private:
 	int size;
 	bool isMale;
 	Vector2f movement;
+	Animation animation;
+	
 
 	Texture *texture;
 	Sprite sprite;

@@ -15,12 +15,14 @@ public:
 
 	void update(vector <Spider> &spider, float deltaTime, Map map);
 
-	Position position;
+	Face face;
 	Vector2f movement;
 
 private:
 	void moveSpider(vector <Spider> &spider, float deltaTime, Map map);
 	void checkBorderCollision(Spider &spider, Map map);
+	Face checkFace(Vector2f movement);
+
 
 	float speed;
 };

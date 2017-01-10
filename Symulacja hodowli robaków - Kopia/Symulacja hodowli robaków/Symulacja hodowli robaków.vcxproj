@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CreateSpiders.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -127,6 +128,7 @@
     <ClCompile Include="UpdateSpider.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="const.h" />
     <ClInclude Include="CreateSpiders.h" />

@@ -7,7 +7,7 @@ UpdateSpider::UpdateSpider(float speed)
 	this->speed = speed;
 	movement.x = 0.0f;
 	movement.y = 0.0f;
-	position = DOWN;
+	face = DOWN;
 }
 
 
@@ -68,8 +68,8 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 		checkBorderCollision(spider[i], map);
 
 		movement = spider[i].getMovement();
-		spider[i].move(movement.x, movement.y);
-
+		spider[i].move(movement.x, movement.y, deltaTime, checkFace(movement));
+	
 
 	}
 }
@@ -99,4 +99,19 @@ void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 
 
 
+}
+
+Face UpdateSpider::checkFace(Vector2f movement)
+{
+	if (movement.y >= movement.x && movement.y >= -movement.x)
+		return UP;
+
+	if (movement.y < movement.x && movement.y > -movement.x)
+		return RIGHT;
+
+	if (movement.y <= movement.x && movement.y <= -movement.x)
+		return DOWN;
+
+	if (movement.y > movement.x && movement.y < -movement.x)
+		return LEFT;
 }

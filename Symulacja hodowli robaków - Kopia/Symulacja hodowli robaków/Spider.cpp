@@ -2,7 +2,8 @@
 
 
 
-Spider::Spider()
+Spider::Spider():
+	animation(texture, Vector2u(5,7), 0.3f)
 {
 	hp = 30;
 	texture = NULL;
@@ -17,6 +18,13 @@ Spider::Spider()
 
 Spider::~Spider()
 {
+}
+
+void Spider::move(float x, float y, float deltaTime, Face face)
+{
+	animation.Update( deltaTime, face);
+	sprite.setTextureRect(animation.uvRect);
+	sprite.move(x, y);
 }
 
 void Spider::move(float x, float y)
@@ -102,6 +110,7 @@ FloatRect Spider::getGlobalBounds()
 {
 	return sprite.getGlobalBounds();
 }
+
 
 Collider Spider::getCollider()
 {

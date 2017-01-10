@@ -16,8 +16,6 @@ CreateSpiders::~CreateSpiders()
 void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spiderF, unsigned short x, unsigned short y)
 {
 
-	srand(time(NULL));
-
 	spiderM.resize(15);
 	spiderF.resize(15);
 
