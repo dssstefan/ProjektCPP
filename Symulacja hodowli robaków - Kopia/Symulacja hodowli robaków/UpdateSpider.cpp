@@ -15,19 +15,19 @@ UpdateSpider::~UpdateSpider()
 {
 }
 
-void UpdateSpider::update(vector <Spider> &spider, float deltaTime, Map map)
+void UpdateSpider::update(vector <Spider> &spider, float *deltaTime, Map map)
 {
 	
 	moveSpider(spider, deltaTime, map);
 
 }
 
-void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
+void UpdateSpider::moveSpider(vector<Spider>& spider, float *deltaTime, Map map)
 {
 
-	std::random_device generator;
-	std::uniform_int_distribution<int> distribution(1, 4);
-	std::uniform_int_distribution<int> distribution2(1, 200);
+	random_device generator;
+	uniform_int_distribution<int> distribution(1, 4);
+	uniform_int_distribution<int> distribution2(1, 200);
 	int random = 0;
 	for (int i = 0; i < 15; i++)
 	{
@@ -50,16 +50,16 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 		switch (spider[i].random)
 		{
 		case 1:
-			movement.x -= speed *deltaTime;
+			movement.x -= speed * (*deltaTime);
 			break;
 		case 2:
-			movement.y -= speed *deltaTime;
+			movement.y -= speed * (*deltaTime);
 			break;
 		case 3:
-			movement.x += speed *deltaTime;
+			movement.x += speed * (*deltaTime);
 			break;
 		case 4:
-			movement.y += speed *deltaTime;
+			movement.y += speed * (*deltaTime);
 			break;
 		default:
 			break;
@@ -68,7 +68,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 		checkBorderCollision(spider[i], map);
 
 		movement = spider[i].getMovement();
-		spider[i].move(movement.x, movement.y, deltaTime, checkFace(movement));
+		spider[i].move(movement.x, movement.y, *deltaTime, checkFace(movement));
 	
 
 	}

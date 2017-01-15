@@ -21,7 +21,7 @@ Spider::~Spider()
 
 void Spider::move(float x, float y, float deltaTime, Face face)
 {
-	animation.Update( deltaTime, face);
+	animation.update( deltaTime, face);
 	sprite.setTextureRect(animation.uvRect);
 	sprite.move(x, y);
 }
@@ -52,15 +52,15 @@ void Spider::addMovement(float x, float y)
 	movement.x += x;
 	movement.y += y;
 
-	if (movement.x > 1)
-		movement.x = 1;
-	else if (movement.x < -1)
-		movement.x = -1;
-	
-	if (movement.y > 1)
-		movement.y = 1;
-	else if (movement.y < -1)
-		movement.y = -1;
+	if (movement.x > 3)
+		movement.x = 3;
+	else if (movement.x < -3)
+		movement.x = -3;
+
+	if (movement.y > 3)
+		movement.y = 3;
+	else if (movement.y < -3)
+		movement.y = -3;
 
 }
 
@@ -69,15 +69,15 @@ void Spider::setMovement(float x, float y)
 	movement.x = x;
 	movement.y = y;
 
-	if (movement.x > 1)
-		movement.x = 1;
-	else if (movement.x < -1)
-		movement.x = -1;
+	if (movement.x > 3)
+		movement.x = 3;
+	else if (movement.x < -3)
+		movement.x = -3;
 
-	if (movement.y > 1)
-		movement.y = 1;
-	else if (movement.y < -1)
-		movement.y = -1;
+	if (movement.y > 3)
+		movement.y = 3;
+	else if (movement.y < -3)
+		movement.y = -3;
 }
 
 sf::Vector2f Spider::getMovement()
@@ -93,6 +93,11 @@ void Spider::draw(sf::RenderWindow &window)
 void Spider::setMale(bool t)
 {
 	isMale = t;
+}
+
+bool Spider::getMale()
+{
+	return isMale;
 }
 
 float Spider::getX()

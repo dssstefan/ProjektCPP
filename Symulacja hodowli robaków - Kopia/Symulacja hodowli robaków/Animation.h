@@ -8,7 +8,7 @@ class Animation
 public:
 	Animation();
 	~Animation();
-	void Update(float deltaTime, Face face);
+	void update(float deltaTime, Face face);
 	void setAnimation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
 	sf::IntRect uvRect;
 

@@ -11,7 +11,7 @@ Animation::~Animation()
 {
 }
 
-void Animation::Update(float deltaTime, Face face)
+void Animation::update(float deltaTime, Face face)
 {
 
 	currentImage.y = face;

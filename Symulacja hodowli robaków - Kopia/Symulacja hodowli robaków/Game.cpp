@@ -3,7 +3,7 @@
 #include "const.h"
 
 Game::Game()
-	:updatespider(10.0f)
+	:updatespider(100.0f)
 {
 	window.create(VideoMode(SCRN_WIDTH, SCRN_HEIGHT), "Symulacja hodowli robaków", Style::Close);
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -34,7 +34,7 @@ Game::Game()
 	setMap("data/map.txt");
 
 	createSpiders.createSpiders(spiderM, spiderF, map.getWidth(), map.getHeight());
-	
+	nourishment.generateFood(map);
 }
 
 
@@ -83,11 +83,10 @@ void Game::start()
 
 		float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 		update(deltaTime);
-
+	
 		lastUpdate = time.getElapsedTime();
 		draw();
 	}
-
 }
 
 void Game::draw()
@@ -100,22 +99,24 @@ void Game::draw()
 			window.draw(sprite[y][x]);
 	}
 
+	nourishment.draw(window);
+
 	for (int i = 0; i < 15; i++)
 	{
 		spiderM[i].draw(window);
 		spiderF[i].draw(window);
 	}
-
+	
 	window.display();
 }
 
 void Game::update(float deltaTime)
 {
 	float push = 0.0f;
-	//std::cout << deltaTime << std::endl;
-	updatespider.update(spiderM, deltaTime, map);
-	updatespider.update(spiderF, deltaTime, map);
 
+	updatespider.update(spiderM, &deltaTime, map);
+	updatespider.update(spiderF, &deltaTime, map);
+	nourishment.update(&deltaTime);
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 15; j++)
@@ -125,17 +126,36 @@ void Game::update(float deltaTime)
 			}
 			spiderM[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
 			spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
+
+			int eat = nourishment.isEating(spiderM[i], 30.0f);
+			for (int k = 1; k <= eat; k++)
+			{
+				//JEDZENIE
+			}
 			
 		}
 
-		for (int a = 0; a < 15; a++)
+		for (int j = 0; j < 15; j++)
 		{
-			if (i == a) {
+			if (i == j) {
 				continue;
 			}
-			spiderF[i].getCollider().CheckCollision(spiderM[a].getCollider(), 0.0f);
-			spiderF[i].getCollider().CheckCollision(spiderF[a].getCollider(), 0.0f);
+			spiderF[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
+			spiderF[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
+
+			int eat = nourishment.isEating(spiderF[i], 30.0f);
+			for (int k = 1; k <= eat; k++)
+			{
+				//JEDZENIE
+			}
 		}
+
+		for (int j = 0; j < map.tileC.size(); j++)
+		{
+			spiderM[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f);
+			spiderF[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f);
+		}
+		
 	}
 }
 

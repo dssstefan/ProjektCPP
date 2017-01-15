@@ -15,8 +15,12 @@ Map::~Map()
 
 bool Map::loadFromFile()
 {
+	int s=0;
 	fstream file;
 	file.open("data/map.txt");
+
+	Texture t;
+	t.loadFromFile("data/empty.png");
 
 	if (!file.is_open())
 		return false;
@@ -43,7 +47,15 @@ bool Map::loadFromFile()
 			short buffer;
 			file >> buffer;
 			tileMap[y][x] = getTile(buffer);
-
+			if (tileMap[y][x].collideable)
+			{
+				Sprite tileSprite; 
+			
+				tileSprite.setTexture(t);
+				tileSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+				tileSprite.setPosition(TILE_SIZE * x, TILE_SIZE * y);
+				tileC.push_back(tileSprite);
+			}
 		}
 
 	}
@@ -60,6 +72,11 @@ unsigned short Map::getWidth()
 unsigned short Map::getHeight()
 {
 	return height;
+}
+
+Collider Map::getCollider(Sprite &sprite)
+{
+	return Collider(sprite);
 }
 
 Map::Tile Map::getTile(short code)

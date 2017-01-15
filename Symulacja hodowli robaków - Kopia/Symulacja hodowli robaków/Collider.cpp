@@ -1,6 +1,6 @@
 #include "Collider.h"
 
-
+using namespace std;
 
 
 Collider::Collider(Sprite& sprite)
@@ -8,6 +8,15 @@ Collider::Collider(Sprite& sprite)
 {
 }
 
+Collider::Collider(Vector2f position, Vector2f size)
+	:body(sp)
+{
+	Texture t;
+	t.loadFromFile("data/empty.png");
+	body.setPosition(position);
+	body.setTexture(t);
+	body.setTextureRect(IntRect(0,0, (int)size.x,(int)size.y ));
+}
 
 Collider::~Collider()
 {
@@ -28,7 +37,7 @@ bool Collider::CheckCollision(Collider & other, float push)
 
 	if (intersectX <= 0.0f && intersectY <= 0.0f)
 	{
-		push = std::min(std::max(push, 0.0f), 1.0f);
+		push = min(max(push, 0.0f), 1.0f);
 
 		if (intersectX > intersectY)
 		{

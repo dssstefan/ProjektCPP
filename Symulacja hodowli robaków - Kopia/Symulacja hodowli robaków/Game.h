@@ -4,6 +4,7 @@
 #include "Spider.h"
 #include "CreateSpiders.h"
 #include "UpdateSpider.h"
+#include "Food.h"
 
 using namespace std;
 using namespace sf;
@@ -41,5 +42,6 @@ private:
 	vector <Spider> spiderF;
 
 	UpdateSpider updatespider;
+	Food nourishment;
 };
 

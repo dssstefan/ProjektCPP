@@ -14,13 +14,14 @@ public:
 	void move(float x, float y, float deltTime, Face face);
 	void move(float x, float y);
 	void setPosition(float x, float y);
-	void setTexture(sf::Texture &t);
-	void setTextureRect(sf::IntRect);
+	void setTexture(Texture &t);
+	void setTextureRect(IntRect);
 	void addMovement(float x, float y);
 	void setMovement(float x, float y);
 	Vector2f getMovement();
-	void draw(sf::RenderWindow &);
+	void draw(RenderWindow &window);
 	void setMale(bool);
+	bool getMale();
 	float getX();
 	float getY();
 	Collider getCollider();

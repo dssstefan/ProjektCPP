@@ -8,6 +8,7 @@ class Collider
 {
 public:
 	Collider(Sprite & sprite);
+	Collider(Vector2f position, Vector2f size);
 	~Collider();
 
 	void Move(float dx, float dy);
@@ -19,5 +20,8 @@ public:
 
 private:
 	Sprite & body;
+	Sprite sp;
+	Vector2f postition;
+	Vector2f size;
 };
 

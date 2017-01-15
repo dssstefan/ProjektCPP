@@ -13,6 +13,8 @@ public:
 	~CreateSpiders();
 
 	void createSpiders( vector <Spider> &spiderM, vector <Spider> &spiderF, unsigned short x, unsigned short y);
+	Spider addSpider(bool isMale, Vector2f position);
+
 private:
 	Texture tSpiderM;
 	Texture tSpiderF;

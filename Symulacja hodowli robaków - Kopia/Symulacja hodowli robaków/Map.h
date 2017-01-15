@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "const.h"
-
+#include "Collider.h"
 using namespace std;
 using namespace sf;
 
@@ -17,6 +17,7 @@ public:
 	bool loadFromFile();
 	unsigned short getWidth();
 	unsigned short getHeight();
+	Collider getCollider(Sprite & sprite);
 
 	struct Tile {
 		TileType type;
@@ -24,7 +25,9 @@ public:
 		bool collideable;
 		bool interactable;
 	};
+
 	vector < vector <Tile > > tileMap;
+	vector <Sprite> tileC;
 private:
 	unsigned short width;
 	unsigned short height;
