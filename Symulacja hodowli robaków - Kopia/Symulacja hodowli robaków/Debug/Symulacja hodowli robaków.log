@@ -1,4 +1,8 @@
-﻿  Spider.cpp
+﻿  SettingsScreen.cpp
 c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\const.h(4): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\settingsscreen.cpp(33): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\settingsscreen.cpp(34): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\settingsscreen.cpp(43): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\settingsscreen.cpp(44): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

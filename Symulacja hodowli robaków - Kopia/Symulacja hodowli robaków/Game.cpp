@@ -46,7 +46,6 @@ void Game::start()
 {
 	Time lastUpdate = Time::Zero;
 	Clock time;
-
 	while (window.isOpen())
 	{
 		Event event;
@@ -80,6 +79,7 @@ void Game::start()
 				window.setView(view);
 			}
 		}
+
 
 		float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 		update(deltaTime);

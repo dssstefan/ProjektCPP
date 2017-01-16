@@ -123,9 +123,18 @@
     <ClCompile Include="CreateSpiders.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameScreen.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Options.cpp" />
+    <ClCompile Include="PauseScreen.cpp" />
+    <ClCompile Include="RunScreen.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
+    <ClCompile Include="SettingsScreen.cpp" />
     <ClCompile Include="Spider.cpp" />
+    <ClCompile Include="MenuScreen.cpp" />
     <ClCompile Include="UpdateSpider.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +144,17 @@
     <ClInclude Include="CreateSpiders.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameScreen.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Options.h" />
+    <ClInclude Include="PauseScreen.h" />
+    <ClInclude Include="RunScreen.h" />
+    <ClInclude Include="ScreenManager.h" />
+    <ClInclude Include="SettingsScreen.h" />
     <ClInclude Include="Spider.h" />
+    <ClInclude Include="MenuScreen.h" />
     <ClInclude Include="UpdateSpider.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
