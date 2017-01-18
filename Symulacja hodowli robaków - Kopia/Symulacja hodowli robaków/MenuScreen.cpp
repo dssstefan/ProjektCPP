@@ -11,19 +11,23 @@ MenuScreen::~MenuScreen()
 {
 }
 
-void MenuScreen::LoadContent()
+void MenuScreen::LoadContent(RenderWindow &window)
 {
-	if (!font.loadFromFile("data/AmaticSC-Regular.ttf"))
+	if (!fontTitle.loadFromFile("data/Aleo-Regular.otf"))
 	{
 		cout << "Font not found" << endl;
 	}
-	title.setFont(font);
-	title.setString("Symulacja Hodowli Robaków");
+	if (!font.loadFromFile("data/Aleo-Regular.otf"))
+	{
+		cout << "Font not found" << endl;
+	}
+	title.setFont(fontTitle);
+	title.setString(L"Symulacja Hodowli Robaków");
 	title.setStyle(sf::Text::Bold);
 	title.setCharacterSize(80);
 	title.setPosition(SCRN_WIDTH / 2 - title.getGlobalBounds().width / 2, 20);
 
-	string str[] = { "Start", "Ustawienia", "Wyjœcie" };
+	wstring str[] = { L"Start", L"Ustawienia", L"Wyjœcie" };
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -33,13 +37,11 @@ void MenuScreen::LoadContent()
 		text[i].setPosition(SCRN_WIDTH  / 2 - text[i].getGlobalBounds().width / 2, 2 * SCRN_HEIGHT / 7 + i * 120);
 	}
 
-	click = Mouse::Left;
 }
 
 void MenuScreen::UnloadContent()
 {
 	GameScreen::UnloadContent();
-	click = NULL;
 }
 
 void MenuScreen::Update(RenderWindow &window, Event event)
@@ -53,15 +55,15 @@ void MenuScreen::Update(RenderWindow &window, Event event)
 		else
 			text[i].setFillColor(Color::White);
 
-	if (input.MouseLeftReleased(click) && text[0].getGlobalBounds().contains(mouse))
+	if (event.type == Event::MouseButtonReleased  && event.mouseButton.button == Mouse::Left && text[0].getGlobalBounds().contains(mouse))
 	{
-		ScreenManager::GetInstance().AddScreen(new RunScreen);
+		ScreenManager::GetInstance().AddScreen(new RunScreen, window);
 	}
-	else if (input.MouseLeftReleased(click) && text[1].getGlobalBounds().contains(mouse))
+	else if (event.type == Event::MouseButtonReleased  && event.mouseButton.button == Mouse::Left && text[1].getGlobalBounds().contains(mouse))
 	{
-		ScreenManager::GetInstance().AddScreen(new SettingsScreen);
+		ScreenManager::GetInstance().AddScreen(new SettingsScreen, window);
 	}
-	else if (input.MouseLeftReleased(click) && text[2].getGlobalBounds().contains(mouse))
+	else if (event.type == Event::MouseButtonReleased  && event.mouseButton.button == Mouse::Left && text[2].getGlobalBounds().contains(mouse) || event.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Escape))
 	{
 		window.close();
 	}

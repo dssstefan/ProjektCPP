@@ -64,6 +64,39 @@ bool Map::loadFromFile()
 	return true;
 }
 
+void Map::loadMap()
+{
+	Texture t;
+	t.loadFromFile("data/empty.png");
+	width = *optionsVar[0];
+	height = *optionsVar[1];
+	tileMap.resize(height);
+
+	for (int i = 0; i < height; i++)
+	{
+		tileMap[i].resize(width);
+	}
+	
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			tileMap[y][x] = getTile(0);
+			if (tileMap[y][x].collideable)
+			{
+				Sprite tileSprite;
+
+				tileSprite.setTexture(t);
+				tileSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+				tileSprite.setPosition(TILE_SIZE * x, TILE_SIZE * y);
+				tileC.push_back(tileSprite);
+			}
+		}
+
+	}
+	
+}
+
 unsigned short Map::getWidth()
 {
 	return width;

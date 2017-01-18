@@ -1,30 +1,28 @@
 #include "Options.h"
 
+int Options::boardWidth = 30;
+int Options::boardHeight = 30;
+int Options::spiderQuantity = 15;
+int Options::bornSpiderQuantity = 1;
+int Options::health = 10;
+int Options::foodRegeneration = 10;
+int Options::maxSize = 100;
+int Options::lifeTime = 60;
+int Options::minProductiveTime = 20;
+int Options::maxProductiveTime = 50;
 
-Options::Options(int width, int height, int quantity, int bornQuantity, int h, int regeneration, int size, int life, int minp, int maxp)
+Options::Options()
 {
-	boardWidth = width;;
-	boardHeight = height;
-	spiderQuantity = quantity;
-	bornSpiderQuantity = bornQuantity;
-	health = h;
-	foodRegeneration = regeneration;
-	maxSize = size;
-	lifeTime = life;
-	minProductiveTime = minp;
-	maxProductiveTime = maxp;
-
-	value.resize(10);
-	value[0] = &boardWidth;
-	value[1] = &boardHeight;
-	value[2] = &spiderQuantity;
-	value[3] = &bornSpiderQuantity;
-	value[4] = &health;
-	value[5] = &foodRegeneration;
-	value[6] = &maxSize;
-	value[7] = &lifeTime;
-	value[8] = &minProductiveTime;
-	value[9] = &maxProductiveTime;
+	optionsVar[0] = &boardWidth;
+	optionsVar[1] = &boardHeight;
+	optionsVar[2] = &spiderQuantity;
+	optionsVar[3] = &bornSpiderQuantity;
+	optionsVar[4] = &health;
+	optionsVar[5] = &foodRegeneration;
+	optionsVar[6] = &maxSize;
+	optionsVar[7] = &lifeTime;
+	optionsVar[8] = &minProductiveTime;
+	optionsVar[9] = &maxProductiveTime;
 }
 
 Options::~Options()

@@ -50,17 +50,37 @@ bool InputManager::KeyReleased(vector<int> keys)
 	return false;
 }
 
-bool InputManager::MouseLeftPressed(int key)
-{
-	if (event.type == Event::MouseButtonPressed  && event.key.code == key)
+bool InputManager::MouseLeftPressed(int clcik)
+{	
+	if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == clcik)
 		return true;
 	return false;
 }
 
-bool InputManager::MouseLeftReleased(int key)
+bool InputManager::MouseLeftReleased(int clcik)
 {
-	if (event.type == Event::MouseButtonReleased  && event.key.code == key)
+	if (event.type == Event::MouseButtonReleased  && event.mouseButton.button == clcik)
 		return true;
+	return false;
+}
+
+bool InputManager::MouseLeftPressed(vector<int> keys)
+{
+	for (int i = 0; i < keys.size(); i++)
+	{
+		if (MouseLeftPressed(keys[i]))
+			return true;
+	}
+	return false;
+}
+
+bool InputManager::MouseLeftReleased(vector<int> keys)
+{
+	for (int i = 0; i < keys.size(); i++)
+	{
+		if (MouseLeftReleased(keys[i]))
+			return true;
+	}
 	return false;
 }
 

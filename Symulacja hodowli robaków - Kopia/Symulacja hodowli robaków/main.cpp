@@ -19,19 +19,19 @@ int main()
 	View view;
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
 	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
-	
 	ScreenManager::GetInstance().Initialize();
-	ScreenManager::GetInstance().LoadContent();
+	ScreenManager::GetInstance().LoadContent(window);
 
 	while (window.isOpen())
 	{
+		
 		Event event;
-		while (window.pollEvent(event))
+		if(window.pollEvent(event))
 		{
-			if (event.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Escape))
+			/*if (event.type == Event::Closed || Keyboard::isKeyPressed(Keyboard::Escape))
 			{
 				window.close();
-			}
+			}*/
 
 			
 		}

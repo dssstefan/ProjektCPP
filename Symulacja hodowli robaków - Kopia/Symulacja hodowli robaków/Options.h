@@ -7,30 +7,23 @@ using namespace std;
 class Options
 {
 public:
-	Options(int width = 30,
-	int height = 30,
-	int quantity = 30,
-	int bornQuantity = 1,
-	int h = 10,
-	int regeneration = 10,
-	int size = 100,
-	int life = 60,
-	int minp = 20,
-	int maxp = 50);
+	Options();
 	~Options();
 
 protected:
-	int boardWidth;
-	int boardHeight;
-	int spiderQuantity;
-	int bornSpiderQuantity;
-	int health;
-	int foodRegeneration;
-	int maxSize;
-	int lifeTime;
-	int minProductiveTime;
-	int maxProductiveTime;
+	int* optionsVar[10];
+private:
+	static int boardWidth;
+	static int boardHeight;
+	static int spiderQuantity;
+	static int bornSpiderQuantity;
+	static int health;
+	static int foodRegeneration;
+	static int maxSize;
+	static int lifeTime;
+	static int minProductiveTime;
+	static int maxProductiveTime;
 
-	vector <int*> value;
+	
 };
 

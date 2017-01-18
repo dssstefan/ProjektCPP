@@ -2,10 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include "Collider.h"
 #include "Animation.h"
+#include "Options.h"
 
 using namespace sf;
 
-class Spider
+class Spider: public Options
 {
 public:
 	Spider();
@@ -18,21 +19,25 @@ public:
 	void setTextureRect(IntRect);
 	void addMovement(float x, float y);
 	void setMovement(float x, float y);
-	Vector2f getMovement();
-	void draw(RenderWindow &window);
 	void setMale(bool);
+	Vector2f getMovement();
 	bool getMale();
 	float getX();
 	float getY();
 	Collider getCollider();
 	FloatRect getGlobalBounds();
+	void draw(RenderWindow &window);
+
 	Vector2u textureSize;
 	Animation animation;
-	int count;
+	int wait;
 	int random;
 private:
 	int hp;
 	int size;
+	int lifeTime;
+	int minProductiveTime;
+	int maxProductiveTime;
 	bool isMale;
 	Vector2f movement;
 

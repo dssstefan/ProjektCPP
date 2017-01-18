@@ -1,6 +1,7 @@
 #include "ScreenManager.h"
 
-GameScreen *currentScreen, *newScreen;
+GameScreen *currentScreen, *newScreen, *previousScreen;
+
 
 ScreenManager::ScreenManager()
 {
@@ -22,9 +23,9 @@ void ScreenManager::Initialize()
 	currentScreen = new MenuScreen();
 }
 
-void ScreenManager::LoadContent()
+void ScreenManager::LoadContent(RenderWindow &window)
 {
-	currentScreen->LoadContent();
+	currentScreen->LoadContent(window);
 }
 
 void ScreenManager::UnloadContent()
@@ -42,10 +43,19 @@ void ScreenManager::Draw(RenderWindow & window)
 	currentScreen->Draw(window);
 }
 
-void ScreenManager::AddScreen(GameScreen * screen)
+void ScreenManager::AddScreen(GameScreen * screen, RenderWindow &window)
 {
+	previousScreen = currentScreen;
 	currentScreen->UnloadContent();
 	delete currentScreen;
 	currentScreen = screen;
-	currentScreen->LoadContent();
+	currentScreen->LoadContent(window);
+}
+
+void ScreenManager::ChangeScreen( RenderWindow &window)
+{
+	currentScreen->UnloadContent();
+	delete currentScreen;
+	currentScreen = previousScreen;
+	currentScreen->LoadContent(window);
 }

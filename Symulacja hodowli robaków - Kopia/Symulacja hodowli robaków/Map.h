@@ -5,16 +5,18 @@
 #include <vector>
 #include "const.h"
 #include "Collider.h"
+#include "Options.h"
 using namespace std;
 using namespace sf;
 
-class Map
+class Map: public Options
 {
 public:
 	Map();
 	~Map();
 
 	bool loadFromFile();
+	void loadMap();
 	unsigned short getWidth();
 	unsigned short getHeight();
 	Collider getCollider(Sprite & sprite);

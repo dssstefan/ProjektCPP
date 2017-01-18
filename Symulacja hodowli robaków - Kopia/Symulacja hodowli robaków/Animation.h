@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "const.h"
 
+using namespace sf;
+
 class Animation
 {
 public:
@@ -10,11 +12,11 @@ public:
 	~Animation();
 	void update(float deltaTime, Face face);
 	void setAnimation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
-	sf::IntRect uvRect;
+	IntRect uvRect;
 
 private:
-	sf::Vector2u imageCount;
-	sf::Vector2u currentImage;
+	Vector2u imageCount;
+	Vector2u currentImage;
 	float totalTime;
 	float switchTime;
 };

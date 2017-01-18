@@ -20,7 +20,7 @@ public:
 private:
 	void draw();
 	void update(float);
-	void setMap(string);
+	void setMap(string name);
 	void updateMap();
 
 

@@ -11,16 +11,16 @@ SettingsScreen::~SettingsScreen()
 {
 }
 
-void SettingsScreen::LoadContent()
+void SettingsScreen::LoadContent(RenderWindow &window)
 {
-	if (!font.loadFromFile("data/AmaticSC-Regular.ttf"))
+	if (!font.loadFromFile("data/Aleo-Regular.otf"))
 	{
 		cout << "Font not found" << endl;
 	}
 
-	string str[] = { "+" , "-" };
-	string lstr[] = { "Szerokoœæ planszy", "Wysokoœæ planszy", "Iloœæ robaków", "Iloœæ m³odych z jednego lêgu", "Odpornoœæ na g³ód", "Szybkoœæ regenerowania pod³o¿a", "Maksymalna wielkoœæ robaka", "Czas ¿ycia", "Czas produktywnoœci:" };
-	string astr[] = { "Pocz¹tek", "Koniec" };
+	wstring str[] = { L"+" , L"-" };
+	wstring lstr[] = { L"Szerokoœæ planszy", L"Wysokoœæ planszy", L"Iloœæ robaków", L"Iloœæ m³odych z jednego lêgu", L"Odpornoœæ na g³ód", L"Szybkoœæ regenerowania pod³o¿a", L"Maksymalna wielkoœæ robaka", L"Czas ¿ycia", L"Czas produktywnoœci:" };
+	wstring astr[] = { L"Pocz¹tek", L"Koniec" };
 
 	vPlus.resize(10);
 	vMinus.resize(10);
@@ -30,8 +30,8 @@ void SettingsScreen::LoadContent()
 		plus[i].setFont(font);
 		plus[i].setCharacterSize(40);
 		plus[i].setString(str[0]);
-		plus[i].setPosition(1150, 60 + 60 * i);
-		vPlus[i].setPosition(1140, 65 + 60 * i);
+		plus[i].setPosition(1150, 50 + 60 * i);
+		vPlus[i].setPosition(1140, 55 + 60 * i);
 		vPlus[i].setFillColor(Color::Black);
 		vPlus[i].setSize(Vector2f(40, 40));
 		vPlus[i].setOutlineThickness(3);
@@ -40,8 +40,8 @@ void SettingsScreen::LoadContent()
 		minus[i].setFont(font);
 		minus[i].setCharacterSize(40);
 		minus[i].setString(str[1]);
-		minus[i].setPosition(990, 60 + 60 * i);
-		vMinus[i].setPosition(975, 65 + 60 * i);
+		minus[i].setPosition(990, 50 + 60 * i);
+		vMinus[i].setPosition(975, 55 + 60 * i);
 		vMinus[i].setFillColor(Color::Black);
 		vMinus[i].setSize(Vector2f(40, 40));
 		vMinus[i].setOutlineThickness(3);
@@ -53,7 +53,7 @@ void SettingsScreen::LoadContent()
 		assistant[i].setFont(font);
 		assistant[i].setCharacterSize(40);
 		assistant[i].setString(astr[i]);
-		assistant[i].setPosition(450, plus[8 + i].getPosition().y);
+		assistant[i].setPosition(650, plus[8 + i].getPosition().y);
 	}
 
 	for (int i = 0; i < 9; i++)
@@ -74,58 +74,65 @@ void SettingsScreen::LoadContent()
 	}
 	returnToMenu.setFont(font);
 	returnToMenu.setCharacterSize(60);
-	returnToMenu.setString("Wróæ");
-	returnToMenu.setPosition(100, plus[9].getPosition().y + 40);
+	returnToMenu.setString(L"Wróæ");
+	returnToMenu.setPosition(100, plus[9].getPosition().y + 50);
 
-	click = Mouse::Left;
-	key = Keyboard::Return;
+	exit.setFont(font);
+	exit.setCharacterSize(60);
+	exit.setString(L"WyjdŸ");
+	exit.setPosition(1000, plus[9].getPosition().y + 50);
 }
 
 void SettingsScreen::UnloadContent()
 {
 	GameScreen::UnloadContent();
-	click = NULL;
 }
 
 void SettingsScreen::Update(RenderWindow &window, Event event)
 {
-	input.Update(window, event);
 
 	Vector2f mouse(Mouse::getPosition(window));
-
-	
-	
-	while (window.pollEvent(event))
+	if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == Mouse::Left)
 	{
-		if (event.type == Event::MouseButtonPressed && event.key.code == Mouse::Left)
+		if (window.waitEvent(event) && event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
 		{
-			
 			for (int i = 0; i < 10; i++)
 			{
-				if (vPlus[i].getGlobalBounds().contains(mouse))
-				{
-					if (i == 6)
-						*value[i] += 10;
-					else
-						*value[i] += 1;
-					UpdateValue(i);
-					break;
-				}
-				else if (vMinus[i].getGlobalBounds().contains(mouse))
-				{
-					if (*value[i] > 0)
+				if (vPlus[i].getGlobalBounds().contains(mouse) || plus[i].getGlobalBounds().contains(mouse))
 					{
 						if (i == 6)
-							*value[i] -= 10;
+							*optionsVar[i] += 10;
 						else
-							*value[i] -= 1;
+							*optionsVar[i] += 1;
 						UpdateValue(i);
 					}
+					else if (vMinus[i].getGlobalBounds().contains(mouse))
+					{
+						if (*optionsVar[i] > 0)
+						{
+							if (i == 6)
+								*optionsVar[i] -= 10;
+							else
+								*optionsVar[i] -= 1;
+							UpdateValue(i);
+						}
+					}
 				}
+			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && returnToMenu.getGlobalBounds().contains(mouse))
+			{
+				ScreenManager::GetInstance().AddScreen(new MenuScreen, window);
+			}
+			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && exit.getGlobalBounds().contains(mouse))
+			{
+				window.close();
 			}
 		}
 	}
-
+	
+	if(event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+		if(window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
+			ScreenManager::GetInstance().AddScreen(new MenuScreen, window);
+	
 	for (int i = 0; i < 10; i++)
 	{
 		if (mouse.y > 60 + i * 60 && mouse.y < 120 + i * 60)
@@ -180,11 +187,10 @@ void SettingsScreen::Update(RenderWindow &window, Event event)
 	else
 		returnToMenu.setFillColor(Color::White);
 
-	if (input.MouseLeftReleased(click) && returnToMenu.getGlobalBounds().contains(mouse))
-	{
-		ScreenManager::GetInstance().AddScreen(new MenuScreen);
-	}
-
+	if (exit.getGlobalBounds().contains(mouse))
+		exit.setFillColor(Color::Green);
+	else
+		exit.setFillColor(Color::White);
 }
 
 void SettingsScreen::Draw(RenderWindow & window)
@@ -209,16 +215,16 @@ void SettingsScreen::Draw(RenderWindow & window)
 	}
 
 	window.draw(returnToMenu);
+	window.draw(exit);
 }
 
 void SettingsScreen::UpdateValue()
 {
-	string cstr[] = { to_string(boardWidth), to_string(boardHeight), to_string(spiderQuantity), to_string(bornSpiderQuantity), to_string(health), to_string(foodRegeneration), to_string(maxSize) + " %", to_string(lifeTime), to_string(minProductiveTime), to_string(maxProductiveTime) };
 	for(int i=0; i<10;i++)
-		center[i].setString(cstr[i]);
+		center[i].setString(to_string(*optionsVar[i]));
 }
 
 void SettingsScreen::UpdateValue(int i)
 {
-	center[i].setString(to_string(*value[i]));
+	center[i].setString(to_string(*optionsVar[i]));
 }

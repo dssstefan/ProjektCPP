@@ -7,14 +7,14 @@ public:
 	MenuScreen();
 	~MenuScreen();
 
-	void LoadContent();
+	void LoadContent(RenderWindow &window);
 	void UnloadContent();
 	void Update(RenderWindow &window, Event event);
 	void Draw(RenderWindow &window);
 private:
 	Font font;
+	Font fontTitle;
 	Text title;
 	Text text[3];
-	int click;
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "Map.h"
 #include "Spider.h"
+#include "Options.h"
+
 class Food
 {
 public:
@@ -10,19 +12,20 @@ public:
 	void generateFood(Map &map);
 	void draw(RenderWindow &window);
 	void eaten(int i, int j, int cooldown);
-	void update(float *deltaTime);
+	void update();
 	int isEating(Spider spider, float cooldown);
 
-	struct Circle {
+	struct Circle: Options {
 		CircleShape shape;
 		bool active;
-		float cooldownInSec = 30;
+		float cooldownInSec = (float)*optionsVar[5];
 	};
 
 	vector <vector <Circle>> foods;
 	vector <Circle*> foodsInCd;
 
 private:
-
+	Time lastUpdate;
+	Clock time;
 };
 

@@ -2,11 +2,11 @@
 #include "SFML\Graphics.hpp"
 #include <vector>
 #include "Spider.h"
-
+#include "Options.h"
 
 using namespace std;
 using namespace sf;
-class CreateSpiders
+class CreateSpiders: public Options
 {
 public:
 	CreateSpiders();
@@ -18,5 +18,8 @@ public:
 private:
 	Texture tSpiderM;
 	Texture tSpiderF;
+	int numberS;
+
+	
 };
 

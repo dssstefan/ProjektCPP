@@ -20,9 +20,10 @@ public:
 	bool KeyReleased(int key);
 	bool KeyReleased(vector<int> keys);
 
-	bool MouseLeftPressed(int key);
-	bool MouseLeftReleased(int key);
-
+	bool MouseLeftPressed(int clcik);
+	bool MouseLeftReleased(int click);
+	bool MouseLeftPressed(vector<int> keys);
+	bool MouseLeftReleased(vector<int> keys);
 private:
 	Event event;
 };

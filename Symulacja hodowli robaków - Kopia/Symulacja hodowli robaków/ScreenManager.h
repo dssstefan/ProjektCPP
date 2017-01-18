@@ -13,16 +13,16 @@ public:
 	static ScreenManager &GetInstance();
 
 	void Initialize();
-	void LoadContent();
+	void LoadContent(RenderWindow &window);
 	void UnloadContent();
 	void Update(RenderWindow &window, Event event);
 	void Draw(RenderWindow &window);
 
-	void AddScreen(GameScreen *screen);
+	void AddScreen(GameScreen *screen, RenderWindow &window);
+	void ChangeScreen( RenderWindow &window);
 protected:
-
-private:
 	
+private:
 
 	ScreenManager();
 	ScreenManager(ScreenManager const&);

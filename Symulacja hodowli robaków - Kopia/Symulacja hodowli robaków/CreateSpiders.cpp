@@ -6,6 +6,7 @@ CreateSpiders::CreateSpiders()
 {
 	tSpiderM.loadFromFile("data/spider06.png");
 	tSpiderF.loadFromFile("data/spider03.png");
+	numberS = *optionsVar[2];
 }
 
 
@@ -19,10 +20,11 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 	uniform_int_distribution<int> randomX(0, x);
 	uniform_int_distribution<int> randomY(0, y);
 	uniform_int_distribution<int> rmovement(0, 100);
-	spiderM.resize(15);
-	spiderF.resize(15);
 
-	for (int i = 0; i < 15; i++)
+	spiderM.resize(numberS);
+	spiderF.resize(numberS);
+
+	for (int i = 0; i < numberS; i++)
 	{
 		
 		spiderM[i].setPosition(randomX(generator) * TILE_SIZE, randomY(generator) * TILE_SIZE);
@@ -36,20 +38,23 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 		spiderM[i].textureSize.x /= 7;
 		spiderM[i].textureSize.y /= 5;
 		spiderM[i].setTextureRect(sf::IntRect(spiderM[i].textureSize.x * 0, spiderM[i].textureSize.y * 2, spiderM[i].textureSize.x, spiderM[i].textureSize.y));
-		spiderM[i].setMovement(rmovement(generator), rmovement(generator));
+		spiderM[i].setMovement(rmovement(generator)/100, rmovement(generator)/100);
 		spiderM[i].animation.setAnimation(&tSpiderM, Vector2u(7, 5), 0.03f);
 
 		spiderF[i].textureSize = tSpiderF.getSize();
 		spiderF[i].textureSize.x /= 7;
 		spiderF[i].textureSize.y /= 5;
 		spiderF[i].setTextureRect(sf::IntRect(spiderF[i].textureSize.x * 0, spiderF[i].textureSize.y * 2, spiderF[i].textureSize.x, spiderF[i].textureSize.y));
-		spiderF[i].setMovement(rmovement(generator), rmovement(generator));
+		spiderF[i].setMovement(rmovement(generator)/100, rmovement(generator)/100);
 		spiderF[i].animation.setAnimation(&tSpiderF, Vector2u(7, 5), 0.03f);
 	}
 }
 
 Spider CreateSpiders::addSpider(bool isMale, Vector2f position)
 {
+	random_device generator;
+	uniform_int_distribution<int> rmovement(0, 100);
+
 	Spider newSpider;
 
 	newSpider.setPosition(position.x, position.y);
@@ -69,6 +74,6 @@ Spider CreateSpiders::addSpider(bool isMale, Vector2f position)
 	newSpider.textureSize.y /= 5;
 	newSpider.setTextureRect(sf::IntRect(newSpider.textureSize.x * 0, newSpider.textureSize.y * 2, newSpider.textureSize.x, newSpider.textureSize.y));
 	newSpider.animation.setAnimation(&tSpiderM, Vector2u(7, 5), 0.03f);
-
+	newSpider.setMovement(rmovement(generator) / 100, rmovement(generator) / 100);
 	return newSpider;
 }

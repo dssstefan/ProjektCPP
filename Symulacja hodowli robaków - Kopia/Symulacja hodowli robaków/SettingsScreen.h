@@ -8,7 +8,7 @@ public:
 	SettingsScreen();
 	~SettingsScreen();
 	
-	void LoadContent();
+	void LoadContent(RenderWindow &window);
 	void UnloadContent();
 	void Update(RenderWindow &window, Event event);
 	void Draw(RenderWindow &window);
@@ -22,8 +22,7 @@ private:
 	Text center[10];
 	Text assistant[2];
 	Text returnToMenu;
-	int click;
-	int key;
+	Text exit;
 	vector <RectangleShape> vPlus;
 	vector <RectangleShape> vMinus;
 	

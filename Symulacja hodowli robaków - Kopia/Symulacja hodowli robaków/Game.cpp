@@ -114,9 +114,9 @@ void Game::update(float deltaTime)
 {
 	float push = 0.0f;
 
-	updatespider.update(spiderM, &deltaTime, map);
-	updatespider.update(spiderF, &deltaTime, map);
-	nourishment.update(&deltaTime);
+	updatespider.update(spiderM, deltaTime, map);
+	updatespider.update(spiderF, deltaTime, map);
+	nourishment.update();
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 15; j++)
@@ -159,7 +159,7 @@ void Game::update(float deltaTime)
 	}
 }
 
-void Game::setMap(string)
+void Game::setMap(string name)
 {
 	if (!map.loadFromFile())
 	{

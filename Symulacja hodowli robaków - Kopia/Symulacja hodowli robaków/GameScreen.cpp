@@ -11,15 +11,13 @@ GameScreen::~GameScreen()
 {
 }
 
-void GameScreen::LoadContent()
+void GameScreen::LoadContent(RenderWindow &window)
 {
 
 }
 
 void GameScreen::UnloadContent()
 {
-	keys.clear();
-	
 }
 
 void GameScreen::Update(RenderWindow &window, Event event)

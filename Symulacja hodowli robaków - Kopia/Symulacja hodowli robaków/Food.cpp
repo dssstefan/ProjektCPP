@@ -17,7 +17,7 @@ void Food::generateFood(Map &map)
 	uniform_int_distribution<int> distribution(0, 255);
 	Circle newFood;
 	
-	foods.resize(map.getWidth());
+	foods.resize(map.getHeight());
 
 	for (int i = 0; i < map.getHeight(); i++)
 	{
@@ -56,7 +56,7 @@ void Food::draw(RenderWindow &window)
 	{
 		for (int j = 0; j < foods[i].size(); j++)
 		{
-			if (foods[i][j].active)
+			if (foods[i][j].active == true)
 				window.draw(foods[i][j].shape);
 		}
 	}
@@ -69,16 +69,17 @@ void Food::eaten(int i, int j, int cooldown)
 	foodsInCd.push_back(&foods[i][j]);
 }
 
-void Food::update(float *deltaTime)
+void Food::update()
 {
-	if (foodsInCd.size())
+	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+	if (foodsInCd.size() > 0)
 	{
 		for (int i = 0; i < foodsInCd.size(); i++)
 		{
-			foodsInCd[i]->cooldownInSec -= *deltaTime;
-
-			if (foodsInCd[i]->cooldownInSec < 0)
+			foodsInCd[i]->cooldownInSec -= deltaTime;
+			if (foodsInCd[i]->cooldownInSec < 0.0f)
 			{
+				foodsInCd[i]->active = true;
 				foodsInCd[i] = foodsInCd[foodsInCd.size() - 1];
 				foodsInCd.pop_back();
 				i--;
@@ -87,7 +88,7 @@ void Food::update(float *deltaTime)
 		}
 
 	}
-
+	lastUpdate = time.getElapsedTime();
 }
 
 int Food::isEating(Spider spider, float cooldown)
@@ -106,10 +107,13 @@ int Food::isEating(Spider spider, float cooldown)
 	{
 		for (int j = jmin; j <= jmax && j < foods[i].size(); j++)
 		{
-			if (spider.getGlobalBounds().intersects(foods[i][j].shape.getGlobalBounds()))
+			if (foods[i][j].active == true)
 			{
-				eaten(i, j, cooldown);
-				eat++;
+				if (spider.getGlobalBounds().intersects(foods[i][j].shape.getGlobalBounds()))
+				{
+					eaten(i, j, cooldown);
+					eat++;
+				}
 			}
 		}
 	}

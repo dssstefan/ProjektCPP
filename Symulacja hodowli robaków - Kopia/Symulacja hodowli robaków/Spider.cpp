@@ -4,12 +4,15 @@
 
 Spider::Spider()
 {
-	hp = 30;
+	hp = *optionsVar[4];
+	lifeTime = *optionsVar[7];
+	minProductiveTime = *optionsVar[8];
+	maxProductiveTime = *optionsVar[9];
 	texture = NULL;
 	isMale = true;
 	textureSize.x = 0;
 	textureSize.y = 0;
-	count = 0;
+	wait = 0;
 	random = 0;
 	movement.x = 0;
 	movement.y = 0;
@@ -78,6 +81,8 @@ void Spider::setMovement(float x, float y)
 		movement.y = 3;
 	else if (movement.y < -3)
 		movement.y = -3;
+
+	wait = 0;
 }
 
 sf::Vector2f Spider::getMovement()
