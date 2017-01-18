@@ -103,9 +103,7 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			view.move(0, TILE_SIZE);
 		}
 	}
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
-			ScreenManager::GetInstance().AddScreen(new PauseScreen, window);
+	
 
 	updateMap();
 	window.setView(view);
@@ -113,6 +111,10 @@ void RunScreen::Update(RenderWindow & window, Event event)
 	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	update(deltaTime);
 	
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
+			ScreenManager::GetInstance().AddScreen(new PauseScreen, window);
+
 	lastUpdate = time.getElapsedTime();
 }
 

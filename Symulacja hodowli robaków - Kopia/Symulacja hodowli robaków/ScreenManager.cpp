@@ -1,6 +1,7 @@
 #include "ScreenManager.h"
 
-GameScreen *currentScreen, *newScreen, *previousScreen;
+GameScreen *currentScreen;
+static GameScreen *previousScreen;
 
 
 ScreenManager::ScreenManager()
@@ -45,9 +46,14 @@ void ScreenManager::Draw(RenderWindow & window)
 
 void ScreenManager::AddScreen(GameScreen * screen, RenderWindow &window)
 {
+	if (previousScreen != nullptr)
+	{
+		previousScreen->UnloadContent();
+		//delete previousScreen;
+	}
+	//currentScreen->UnloadContent();
 	previousScreen = currentScreen;
-	currentScreen->UnloadContent();
-	delete currentScreen;
+	//delete currentScreen;
 	currentScreen = screen;
 	currentScreen->LoadContent(window);
 }

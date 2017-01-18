@@ -131,6 +131,7 @@ void PauseScreen::Update(RenderWindow &window, Event event)
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && returnToMenu.getGlobalBounds().contains(mouse))
 			{
 				ScreenManager::GetInstance().ChangeScreen(window);
+				return;
 			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && exit.getGlobalBounds().contains(mouse))
 			{
@@ -141,8 +142,10 @@ void PauseScreen::Update(RenderWindow &window, Event event)
 
 	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
 		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
+		{
 			ScreenManager::GetInstance().ChangeScreen(window);
-
+			return;
+		}
 	if (event.type == Event::Closed)
 		window.close();
 
