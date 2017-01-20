@@ -85,21 +85,29 @@ void RunScreen::Update(RenderWindow & window, Event event)
 		if (event.key.code == Keyboard::Left)
 		{
 			camera.x -= TILE_SIZE;
+			if (camera.x < 0)
+				camera.x = 0;
 			view.move(-TILE_SIZE, 0);
 		}
 		else if (event.key.code == Keyboard::Right)
 		{
 			camera.x += TILE_SIZE;
+			if (camera.x > map.getWidth()*TILE_SIZE)
+				camera.x = map.getWidth()*TILE_SIZE;
 			view.move(TILE_SIZE, 0);
 		}
 		else if (event.key.code == Keyboard::Up)
 		{
 			camera.y -= TILE_SIZE;
+			if (camera.y < 0)
+				camera.y = 0;
 			view.move(0, -TILE_SIZE);
 		}
 		else if (event.key.code == Keyboard::Down)
 		{
 			camera.y += TILE_SIZE;
+			if (camera.y > map.getHeight()*TILE_SIZE)
+				camera.y = map.getHeight()*TILE_SIZE;
 			view.move(0, TILE_SIZE);
 		}
 	}

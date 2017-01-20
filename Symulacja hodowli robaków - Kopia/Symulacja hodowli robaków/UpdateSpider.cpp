@@ -18,17 +18,18 @@ UpdateSpider::~UpdateSpider()
 void UpdateSpider::update(vector <Spider> &spider, float deltaTime, Map map)
 {
 	
-	moveSpider(spider, deltaTime, map);
+	moveSpider(spider, map);
 
 }
 
-void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
+void UpdateSpider::moveSpider(vector<Spider>& spider, Map map)
 {
 
 	random_device generator;
 	uniform_int_distribution<int> distribution(1, 4);
 	uniform_int_distribution<int> distribution2(1, 50);
 	int random = 0;
+	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	for (int i = 0; i < spider.size(); i++)
 	{
 		movement.x = 0.0f;
@@ -72,7 +73,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 	
 
 	}
-
+	lastUpdate = time.getElapsedTime();
 }
 
 void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
@@ -82,18 +83,22 @@ void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 
 	if (nextPos.x <= 0.0f)
 	{
+		spider.setPosition(0, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
 	if (nextPos.x >= map.getWidth()*TILE_SIZE - 64)
 	{
+		spider.setPosition(map.getWidth()*TILE_SIZE - 64, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
 	if (nextPos.y <= 0.0f)
 	{
+		spider.setPosition(spider.getX(), 0);
 		spider.setMovement(movement.x, -movement.y);
 	}
 	if (nextPos.y >= map.getHeight()*TILE_SIZE -64)
 	{
+		spider.setPosition(spider.getX(), map.getHeight()*TILE_SIZE - 64);
 		spider.setMovement(movement.x, -movement.y);
 	}
 

@@ -13,6 +13,10 @@ PauseScreen::~PauseScreen()
 
 void PauseScreen::LoadContent(RenderWindow &window)
 {
+	View view;
+	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
+	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
+	window.setView(view);
 	if (!font.loadFromFile("data/Aleo-Regular.otf"))
 	{
 		cout << "Font not found" << endl;
@@ -87,6 +91,12 @@ void PauseScreen::LoadContent(RenderWindow &window)
 	returnToMenu.setString(L"Wróæ");
 	returnToMenu.setPosition(100, plus[9].getPosition().y + 50);
 
+	editMap.setFont(font);
+	editMap.setCharacterSize(60);
+	editMap.setString(L"Edytuj mape");
+	editMap.setPosition(450, plus[9].getPosition().y + 50);
+	editMap.setFillColor(Color(88, 88, 88));
+
 	exit.setFont(font);
 	exit.setCharacterSize(60);
 	exit.setString(L"WyjdŸ");
@@ -110,22 +120,55 @@ void PauseScreen::Update(RenderWindow &window, Event event)
 			{
 				if (vPlus[i].getGlobalBounds().contains(mouse) || plus[i].getGlobalBounds().contains(mouse))
 				{
-					if (i == 6)
-						*optionsVar[i] += 10;
-					else
+					switch (i)
+					{
+					case 6:
+						*optionsVar[6] += 10;
+						break;
+					case 8:
+						if (*optionsVar[8] < *optionsVar[7] && *optionsVar[8] < *optionsVar[9])
+							*optionsVar[8] += 1;
+						break;
+					case 9:
+						if (*optionsVar[9] < *optionsVar[7])
+							*optionsVar[9] += 1;
+						break;
+					default:
 						*optionsVar[i] += 1;
+					}
 					UpdateValue(i);
 				}
 				else if (vMinus[i].getGlobalBounds().contains(mouse))
 				{
-					if (*optionsVar[i] > 0)
+					switch (i)
 					{
-						if (i == 6)
-							*optionsVar[i] -= 10;
-						else
+					case 6:
+						if (*optionsVar[6] > 100)
+							*optionsVar[6] -= 10;
+						break;
+					case 7:
+						if (*optionsVar[7] > 1)
+							*optionsVar[7] -= 1;
+						if (*optionsVar[7] == *optionsVar[8] - 1)
+						{
+							*optionsVar[8] -= 1;
+							UpdateValue(8);
+						}
+						if (*optionsVar[7] == *optionsVar[9] - 1)
+						{
+							*optionsVar[9] -= 1;
+							UpdateValue(9);
+						}
+						break;
+					case 9:
+						if (*optionsVar[9] > *optionsVar[8])
+							*optionsVar[9] -= 1;
+						break;
+					default:
+						if (*optionsVar[i] > 0)
 							*optionsVar[i] -= 1;
-						UpdateValue(i);
 					}
+					UpdateValue(i);
 				}
 			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && returnToMenu.getGlobalBounds().contains(mouse))
@@ -231,6 +274,7 @@ void PauseScreen::Draw(RenderWindow & window)
 	}
 
 	window.draw(returnToMenu);
+	window.draw(editMap);
 	window.draw(exit);
 }
 

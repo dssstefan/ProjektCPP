@@ -22,6 +22,7 @@ private:
 	Text center[10];
 	Text assistant[2];
 	Text returnToMenu;
+	Text editMap;
 	Text exit;
 	vector <RectangleShape> vPlus;
 	vector <RectangleShape> vMinus;

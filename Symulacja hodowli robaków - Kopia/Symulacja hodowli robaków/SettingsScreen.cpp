@@ -77,6 +77,11 @@ void SettingsScreen::LoadContent(RenderWindow &window)
 	returnToMenu.setString(L"Wróæ");
 	returnToMenu.setPosition(100, plus[9].getPosition().y + 50);
 
+	editMap.setFont(font);
+	editMap.setCharacterSize(60);
+	editMap.setString(L"Edytuj mape");
+	editMap.setPosition(450, plus[9].getPosition().y + 50);
+
 	exit.setFont(font);
 	exit.setCharacterSize(60);
 	exit.setString(L"WyjdŸ");
@@ -99,28 +104,73 @@ void SettingsScreen::Update(RenderWindow &window, Event event)
 			for (int i = 0; i < 10; i++)
 			{
 				if (vPlus[i].getGlobalBounds().contains(mouse) || plus[i].getGlobalBounds().contains(mouse))
+				{
+					switch (i)
 					{
-						if (i == 6)
-							*optionsVar[i] += 10;
-						else
-							*optionsVar[i] += 1;
-						UpdateValue(i);
+					case 6:
+						*optionsVar[6] += 10;
+						break;
+					case 8:
+						if (*optionsVar[8] < *optionsVar[7] && *optionsVar[8] < *optionsVar[9] )
+							*optionsVar[8] += 1;
+						break;
+					case 9:
+						if (*optionsVar[9] < *optionsVar[7] )
+							*optionsVar[9] += 1;
+						break;
+					default:
+						*optionsVar[i] += 1;
 					}
-					else if (vMinus[i].getGlobalBounds().contains(mouse))
-					{
-						if (*optionsVar[i] > 0)
-						{
-							if (i == 6)
-								*optionsVar[i] -= 10;
-							else
-								*optionsVar[i] -= 1;
-							UpdateValue(i);
-						}
-					}
+					UpdateValue(i);
 				}
+				else if (vMinus[i].getGlobalBounds().contains(mouse))
+				{
+					switch (i)
+					{
+					case 0:
+						if (*optionsVar[0] > 1)
+							*optionsVar[0] -= 1;
+						break;
+					case 1:
+						if (*optionsVar[1] > 1)
+							*optionsVar[1] -= 1;
+						break;
+					case 6:
+						if (*optionsVar[6] > 100)
+							*optionsVar[6] -= 10;
+						break;
+					case 7:
+						if (*optionsVar[7] > 1)
+							*optionsVar[7] -= 1;
+						if (*optionsVar[7] == *optionsVar[8] - 1)
+						{
+							*optionsVar[8] -= 1;
+							UpdateValue(8);
+						}
+						if (*optionsVar[7] == *optionsVar[9] - 1)
+						{
+							*optionsVar[9] -= 1;
+							UpdateValue(9);
+						}
+						break;
+					case 9:
+						if (*optionsVar[9] > *optionsVar[8])
+							*optionsVar[9] -= 1;
+						break;
+					default:
+						if(*optionsVar[i] > 0)
+							*optionsVar[i] -= 1;
+					}
+					UpdateValue(i);
+				}
+			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && returnToMenu.getGlobalBounds().contains(mouse))
 			{
 				ScreenManager::GetInstance().AddScreen(new MenuScreen, window);
+			}
+			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && editMap.getGlobalBounds().contains(mouse))
+			{
+				//ScreenManager::GetInstance().AddScreen(new EditMapScreen, window);
 			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && exit.getGlobalBounds().contains(mouse))
 			{
@@ -187,6 +237,11 @@ void SettingsScreen::Update(RenderWindow &window, Event event)
 	else
 		returnToMenu.setFillColor(Color::White);
 
+	if (editMap.getGlobalBounds().contains(mouse))
+		editMap.setFillColor(Color::Green);
+	else
+		editMap.setFillColor(Color::White);
+
 	if (exit.getGlobalBounds().contains(mouse))
 		exit.setFillColor(Color::Green);
 	else
@@ -215,6 +270,7 @@ void SettingsScreen::Draw(RenderWindow & window)
 	}
 
 	window.draw(returnToMenu);
+	window.draw(editMap);
 	window.draw(exit);
 }
 

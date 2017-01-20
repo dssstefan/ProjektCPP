@@ -19,10 +19,11 @@ public:
 	Vector2f movement;
 
 private:
-	void moveSpider(vector <Spider> &spider, float deltaTime, Map map);
+	void moveSpider(vector <Spider> &spider, Map map);
 	void checkBorderCollision(Spider &spider, Map map);
 	Face checkFace(Vector2f movement);
-
+	Clock time;
+	Time lastUpdate;
 
 	float speed;
 };

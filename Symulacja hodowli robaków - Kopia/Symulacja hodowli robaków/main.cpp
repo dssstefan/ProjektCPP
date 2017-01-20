@@ -19,6 +19,7 @@ int main()
 	View view;
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
 	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
+	window.setView(view);
 	ScreenManager::GetInstance().Initialize();
 	ScreenManager::GetInstance().LoadContent(window);
 
