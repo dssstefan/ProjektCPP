@@ -17,19 +17,19 @@ RunScreen::RunScreen() :updatespider(100.0f)
 	WIDTH = SCRN_WIDTH / TILE_SIZE + 2;
 	HEIGHT = SCRN_HEIGHT / TILE_SIZE + 2;
 
-	map.loadMap();
+	MapS::GetInstace().updateMap();
 
 	Sprite standard(texture[0]);
-	if (map.getHeight() < HEIGHT)
-		TRUEHEIGHT = map.getHeight();
+	if (MapS::GetInstace().getHeight() < HEIGHT)
+		TRUEHEIGHT = MapS::GetInstace().getHeight();
 	else
 		TRUEHEIGHT = HEIGHT;
 
 	sprite.resize(TRUEHEIGHT);
 
-	if (map.getWidth() < WIDTH)
+	if (MapS::GetInstace().getWidth() < WIDTH)
 	{
-		TRUEWIDTH = map.getWidth();
+		TRUEWIDTH = MapS::GetInstace().getWidth();
 	}
 	else
 	{
@@ -42,10 +42,10 @@ RunScreen::RunScreen() :updatespider(100.0f)
 	}
 	
 
-	camera = Vector2f((map.getWidth() / 2)*TILE_SIZE, (map.getHeight() / 2)*TILE_SIZE);
+	camera = Vector2f((MapS::GetInstace().getWidth() / 2)*TILE_SIZE, (MapS::GetInstace().getHeight() / 2)*TILE_SIZE);
 
-	createSpiders.createSpiders(spiderM, spiderF, map.getWidth()-1, map.getHeight()-1);
-	nourishment.generateFood(map);
+	createSpiders.createSpiders(spiderM, spiderF, MapS::GetInstace().getWidth()-1, MapS::GetInstace().getHeight()-1);
+	nourishment.generateFood();
 }
 
 
@@ -93,8 +93,8 @@ void RunScreen::Update(RenderWindow & window, Event event)
 		else if (event.key.code == Keyboard::Right)
 		{
 			camera.x += TILE_SIZE;
-			if (camera.x > map.getWidth()*TILE_SIZE)
-				camera.x = map.getWidth()*TILE_SIZE;
+			if (camera.x > MapS::GetInstace().getWidth()*TILE_SIZE)
+				camera.x = MapS::GetInstace().getWidth()*TILE_SIZE;
 			view.move(TILE_SIZE, 0);
 		}
 		else if (event.key.code == Keyboard::Up)
@@ -107,8 +107,8 @@ void RunScreen::Update(RenderWindow & window, Event event)
 		else if (event.key.code == Keyboard::Down)
 		{
 			camera.y += TILE_SIZE;
-			if (camera.y > map.getHeight()*TILE_SIZE)
-				camera.y = map.getHeight()*TILE_SIZE;
+			if (camera.y > MapS::GetInstace().getHeight()*TILE_SIZE)
+				camera.y = MapS::GetInstace().getHeight()*TILE_SIZE;
 			view.move(0, TILE_SIZE);
 		}
 	}
@@ -117,8 +117,8 @@ void RunScreen::Update(RenderWindow & window, Event event)
 	window.setView(view);
 
 	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
-	updatespider.update(spiderM, deadSpider, deltaTime, map);
-	updatespider.update(spiderF, deadSpider, deltaTime, map);
+	updatespider.update(spiderM, deadSpider, deltaTime);
+	updatespider.update(spiderF, deadSpider, deltaTime);
 
 	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	nourishment.update(deltaTime);
@@ -170,9 +170,9 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			spiderM[i].hp = *optionsVar[4];
 			spiderM[i].grow(eat);
 		}
-		for (int j = 0; j < map.tileC.size(); j++)
+		for (int j = 0; j < MapS::GetInstace().tileC.size(); j++)
 		{
-			if (spiderM[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f))
+			if (spiderM[i].getCollider().CheckCollision(MapS::GetInstace().getCollider(MapS::GetInstace().tileC[j]), 0.0f))
 				spiderM[i].setMovement(-spiderM[i].getMovement().x, -spiderM[i].getMovement().y);
 		}
 	}
@@ -204,9 +204,9 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			spiderF[i].hp = *optionsVar[4];
 			spiderF[i].grow(eat);
 		}
-		for (int j = 0; j < map.tileC.size(); j++)
+		for (int j = 0; j < MapS::GetInstace().tileC.size(); j++)
 		{
-			if (spiderF[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f))
+			if (spiderF[i].getCollider().CheckCollision(MapS::GetInstace().getCollider(MapS::GetInstace().tileC[j]), 0.0f))
 				spiderF[i].setMovement(-spiderF[i].getMovement().x, -spiderF[i].getMovement().y);
 		}
 
@@ -234,15 +234,15 @@ void RunScreen::updateMap()
 
 		leftBorder = min.x / TILE_SIZE;
 	}
-	else if (leftBorder > 0 && rightBorder - 1 < map.getWidth() - 1)
+	else if (leftBorder > 0 && rightBorder - 1 < MapS::GetInstace().getWidth() - 1)
 	{
 		min.x -= TILE_SIZE;
 		view.move(-TILE_SIZE, 0);
 		leftBorder = min.x / TILE_SIZE;
 	}
-	else if (rightBorder - 1 >= map.getWidth() - 1)
+	else if (rightBorder - 1 >= MapS::GetInstace().getWidth() - 1)
 	{
-		int difference = view.getCenter().x + view.getSize().x / 2 - (map.getWidth() - 1)*TILE_SIZE;
+		int difference = view.getCenter().x + view.getSize().x / 2 - (MapS::GetInstace().getWidth() - 1)*TILE_SIZE;
 
 		difference = -difference - TILE_SIZE;
 		min.x += difference;
@@ -264,15 +264,15 @@ void RunScreen::updateMap()
 
 		upBorder = min.y / TILE_SIZE;
 	}
-	else if (upBorder > 0 && bottomBorder - 1 < map.getHeight() - 1)
+	else if (upBorder > 0 && bottomBorder - 1 < MapS::GetInstace().getHeight() - 1)
 	{
 		min.y -= TILE_SIZE;
 		view.move(0, -TILE_SIZE);
 		upBorder = min.y / TILE_SIZE;
 	}
-	else if (bottomBorder -1  >= map.getHeight() -1)
+	else if (bottomBorder -1  >= MapS::GetInstace().getHeight() -1)
 	{
-		int difference = view.getCenter().y + view.getSize().y / 2 - (map.getHeight() - 1)*TILE_SIZE;
+		int difference = view.getCenter().y + view.getSize().y / 2 - (MapS::GetInstace().getHeight() - 1)*TILE_SIZE;
 
 		difference = -difference - TILE_SIZE;
 		min.y += difference;
@@ -280,7 +280,7 @@ void RunScreen::updateMap()
 		upBorder = min.y / TILE_SIZE;
 		view.setCenter(view.getCenter().x, (upBorder + TRUEHEIGHT / 2)*(TILE_SIZE+1) + TILE_SIZE);
 
-		if (bottomBorder -1  == map.getHeight() -1 )
+		if (bottomBorder -1  == MapS::GetInstace().getHeight() -1 )
 			view.move(0, -TILE_SIZE / 2);
 	}
 	else if (upBorder == 0)
@@ -291,7 +291,7 @@ void RunScreen::updateMap()
 		for (int x = 0, v = leftBorder; x < TRUEWIDTH; x++)
 		{
 			sprite[y][x].setPosition(v*TILE_SIZE, h*TILE_SIZE);
-			sprite[y][x].setTexture(texture[map.tileMap[h][v].type]);
+			sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[h][v].type]);
 			v++;
 		}
 		h++;

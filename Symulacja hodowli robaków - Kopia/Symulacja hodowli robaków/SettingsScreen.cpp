@@ -13,6 +13,11 @@ SettingsScreen::~SettingsScreen()
 
 void SettingsScreen::LoadContent(RenderWindow &window)
 {
+	View view;
+	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
+	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
+	window.setView(view);
+
 	if (!font.loadFromFile("data/Aleo-Regular.otf"))
 	{
 		cout << "Font not found" << endl;
@@ -170,7 +175,7 @@ void SettingsScreen::Update(RenderWindow &window, Event event)
 			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && editMap.getGlobalBounds().contains(mouse))
 			{
-				//ScreenManager::GetInstance().AddScreen(new EditMapScreen, window);
+				ScreenManager::GetInstance().AddScreen(new EditMapScreen, window);
 			}
 			if (event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left && exit.getGlobalBounds().contains(mouse))
 			{

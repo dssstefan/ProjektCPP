@@ -36,7 +36,7 @@ private:
 	int TRUEHEIGHT;
 	float push;
 	Texture texture[12];
-	Map map;
+	//Map map;
 	vector<vector<Sprite>> sprite;
 
 	Vector2f camera;

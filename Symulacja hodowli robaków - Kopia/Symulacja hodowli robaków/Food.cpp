@@ -15,24 +15,26 @@ Food::~Food()
 	}
 }
 
-void Food::generateFood(Map &map)
+void Food::generateFood()
 {
+	int height = MapS::GetInstace().getHeight();
+	int width = MapS::GetInstace().getWidth();
 	random_device generator;
 	uniform_int_distribution<int> distribution(0, 255);
 	Circle newFood;
 	
-	foods.resize(map.getHeight());
+	foods.resize(height);
 
-	for (int i = 0; i < map.getHeight(); i++)
+	for (int i = 0; i < height; i++)
 	{
-		foods[i].resize(map.getWidth());
+		foods[i].resize(width);
 	}
 
-	for (int y = 0; y < map.getHeight(); y++)
+	for (int y = 0; y < height; y++)
 	{
-		for (int x = 0; x < map.getWidth(); x++)
+		for (int x = 0; x < width; x++)
 		{
-			if (map.tileMap[y][x].interactable)
+			if (MapS::GetInstace().tileMap[y][x].interactable)
 			{
 				newFood.shape.setPosition(x * TILE_SIZE + TILE_SIZE / 2 - 8, y * TILE_SIZE + TILE_SIZE / 2 - 8);
 				newFood.shape.setRadius(5.0f);

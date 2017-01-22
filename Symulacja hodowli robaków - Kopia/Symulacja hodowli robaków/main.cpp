@@ -3,6 +3,7 @@
 #include <iostream>
 #include "ScreenManager.h"
 #include "const.h"
+#include "MapS.h"
 using namespace sf;
 
 /*
@@ -23,9 +24,10 @@ int main()
 	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
 	window.setView(view);
 	window.setFramerateLimit(240);
-
+	Options options;
 	ScreenManager::GetInstance().Initialize();
 	ScreenManager::GetInstance().LoadContent(window);
+	MapS::GetInstace().loadMap();
 
 	while (window.isOpen())
 	{

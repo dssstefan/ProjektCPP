@@ -1,15 +1,14 @@
 #pragma once
-#include "Map.h"
 #include "Spider.h"
 #include "Options.h"
-
+#include "MapS.h"
 class Food
 {
 public:
 	Food();
 	~Food();
 
-	void generateFood(Map &map);
+	void generateFood();
 	void draw(RenderWindow &window);
 	void eaten(int i, int j, int cooldown);
 	void update(float deltaTime);

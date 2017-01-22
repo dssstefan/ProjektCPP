@@ -5,6 +5,7 @@
 #include "SettingsScreen.h"
 #include "RunScreen.h"
 #include "PauseScreen.h"
+#include "EditMapScreen.h"
 
 class ScreenManager
 {

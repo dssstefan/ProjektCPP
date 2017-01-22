@@ -18,10 +18,10 @@ UpdateSpider::~UpdateSpider()
 {
 }
 
-void UpdateSpider::update(vector <Spider> &spider, vector <Spider> &deadSpider, float deltaTime, Map map)
+void UpdateSpider::update(vector <Spider> &spider, vector <Spider> &deadSpider, float deltaTime)
 {
 	time.restart();
-	moveSpider(spider, deltaTime, map);
+	moveSpider(spider, deltaTime);
 	deltaTime += time.getElapsedTime().asSeconds();
 	for (int i = 0; i < spider.size(); i++)
 	{
@@ -53,7 +53,7 @@ void UpdateSpider::update(vector <Spider> &spider, vector <Spider> &deadSpider, 
 	}
 }
 
-void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
+void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime)
 {
 
 	random_device generator;
@@ -98,7 +98,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 			break;
 		}
 		spider[i].addMovement(movement.x, movement.y);
-		checkBorderCollision(spider[i], map);
+		checkBorderCollision(spider[i]);
 
 		movement = spider[i].getMovement();
 		spider[i].move(movement.x, movement.y, deltaTime, checkFace(movement));
@@ -108,7 +108,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 	//lastUpdate = time.getElapsedTime();
 }
 
-void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
+void UpdateSpider::checkBorderCollision(Spider& spider)
 {
 	Vector2f movement = spider.getMovement();
 	Vector2f nextPos(spider.getX() + movement.x, spider.getY() + movement.y);
@@ -118,9 +118,9 @@ void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 		spider.setPosition(0, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
-	if (nextPos.x >= map.getWidth()*TILE_SIZE - 64)
+	if (nextPos.x >= MapS::GetInstace().getWidth()*TILE_SIZE - 64)
 	{
-		spider.setPosition(map.getWidth()*TILE_SIZE - 64, spider.getY());
+		spider.setPosition(MapS::GetInstace().getWidth()*TILE_SIZE - 64, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
 	if (nextPos.y <= 0.0f)
@@ -128,9 +128,9 @@ void UpdateSpider::checkBorderCollision(Spider& spider, Map map)
 		spider.setPosition(spider.getX(), 0);
 		spider.setMovement(movement.x, -movement.y);
 	}
-	if (nextPos.y >= map.getHeight()*TILE_SIZE -64)
+	if (nextPos.y >= MapS::GetInstace().getHeight()*TILE_SIZE -64)
 	{
-		spider.setPosition(spider.getX(), map.getHeight()*TILE_SIZE - 64);
+		spider.setPosition(spider.getX(), MapS::GetInstace().getHeight()*TILE_SIZE - 64);
 		spider.setMovement(movement.x, -movement.y);
 	}
 

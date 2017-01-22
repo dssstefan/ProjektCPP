@@ -69,6 +69,12 @@
     <ClCompile Include="Eggs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MapS.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditMapScreen.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -118,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="Eggs.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditMapScreen.h">
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

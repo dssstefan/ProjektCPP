@@ -121,11 +121,13 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CreateSpiders.cpp" />
+    <ClCompile Include="EditMapScreen.cpp" />
     <ClCompile Include="Eggs.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameScreen.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapS.cpp" />
     <ClCompile Include="Options.cpp" />
     <ClCompile Include="PauseScreen.cpp" />
     <ClCompile Include="RunScreen.cpp" />
@@ -140,10 +142,12 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="const.h" />
     <ClInclude Include="CreateSpiders.h" />
+    <ClInclude Include="EditMapScreen.h" />
     <ClInclude Include="Eggs.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="GameScreen.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MapS.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="RunScreen.h" />
