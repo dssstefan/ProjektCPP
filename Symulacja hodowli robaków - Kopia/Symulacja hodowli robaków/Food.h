@@ -2,6 +2,7 @@
 #include "Spider.h"
 #include "Options.h"
 #include "MapS.h"
+
 class Food
 {
 public:
@@ -22,6 +23,4 @@ public:
 
 	vector <vector <Circle>> foods;
 	vector <Circle*> foodsInCd;
-
 };
-

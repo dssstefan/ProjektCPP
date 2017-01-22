@@ -26,6 +26,4 @@ private:
 	Text editMap;
 	vector <RectangleShape> vPlus;
 	vector <RectangleShape> vMinus;
-	
 };
-

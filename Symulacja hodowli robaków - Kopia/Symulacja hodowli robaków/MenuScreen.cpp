@@ -1,11 +1,9 @@
 #include "MenuScreen.h"
 #include "const.h"
 
-
 MenuScreen::MenuScreen()
 {
 }
-
 
 MenuScreen::~MenuScreen()
 {
@@ -36,7 +34,6 @@ void MenuScreen::LoadContent(RenderWindow &window)
 		text[i].setString(str[i]);
 		text[i].setPosition(SCRN_WIDTH  / 2 - text[i].getGlobalBounds().width / 2, 2 * SCRN_HEIGHT / 7 + i * 120);
 	}
-
 }
 
 void MenuScreen::UnloadContent()
@@ -73,5 +70,4 @@ void MenuScreen::Draw(RenderWindow & window)
 	window.draw(title);
 	for (int i = 0; i < 3; i++)
 		window.draw(text[i]);
-
 }

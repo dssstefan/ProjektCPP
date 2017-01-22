@@ -1,7 +1,6 @@
 #include "EditMapScreen.h"
 #include "const.h"
 
-
 EditMapScreen::EditMapScreen()
 {
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -40,9 +39,7 @@ EditMapScreen::EditMapScreen()
 		sprite[y].resize(TRUEWIDTH, standard);
 	}
 
-
 	camera = Vector2f((MapS::GetInstace().getWidth() / 2)*TILE_SIZE, (MapS::GetInstace().getHeight() / 2)*TILE_SIZE);
-
 }
 
 

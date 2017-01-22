@@ -7,7 +7,6 @@ enum Face {
 	DOWN, LEFT, UP, RIGHT
 };
 
-
 enum TileType {
 	GRASS_1, SAND_1, BUSH, GRASS_2, GRASS_3, GRASS_4,
 	GRASS_5, SAND_2, GRASS_6, GRASS_7, GRASS_8, GRASS_9

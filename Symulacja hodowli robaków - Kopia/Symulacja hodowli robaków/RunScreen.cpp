@@ -40,10 +40,8 @@ RunScreen::RunScreen() :updatespider(100.0f)
 	{
 		sprite[y].resize(TRUEWIDTH, standard);
 	}
-	
-
+	view.setViewport(getViewPort());
 	camera = Vector2f((MapS::GetInstace().getWidth() / 2)*TILE_SIZE, (MapS::GetInstace().getHeight() / 2)*TILE_SIZE);
-
 	createSpiders.createSpiders(spiderM, spiderF, MapS::GetInstace().getWidth()-1, MapS::GetInstace().getHeight()-1);
 	nourishment.generateFood();
 }
@@ -78,7 +76,6 @@ void RunScreen::UnloadContent()
 
 void RunScreen::Update(RenderWindow & window, Event event)
 {
-
 	if (event.type == Event::Closed)
 		window.close();
 	if (event.type == Event::KeyPressed)
@@ -150,7 +147,6 @@ void RunScreen::Update(RenderWindow & window, Event event)
 	}
 	lastUpdate = time.getElapsedTime();
 	
-
 	for (int i = 0; i < spiderM.size(); i++)
 	{
 		for (int j = 0; j < spiderM.size(); j++)
@@ -209,7 +205,6 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			if (spiderF[i].getCollider().CheckCollision(MapS::GetInstace().getCollider(MapS::GetInstace().tileC[j]), 0.0f))
 				spiderF[i].setMovement(-spiderF[i].getMovement().x, -spiderF[i].getMovement().y);
 		}
-
 	}
 
 	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
@@ -228,7 +223,7 @@ void RunScreen::updateMap()
 
 	if (min.x < 0)
 	{
-		int difference = abs(min.x);
+		float difference = abs(min.x);
 		min.x += difference;
 		view.move(difference, 0);
 
@@ -242,26 +237,27 @@ void RunScreen::updateMap()
 	}
 	else if (rightBorder - 1 >= MapS::GetInstace().getWidth() - 1)
 	{
-		int difference = view.getCenter().x + view.getSize().x / 2 - (MapS::GetInstace().getWidth() - 1)*TILE_SIZE;
+		float difference = view.getCenter().x + view.getSize().x / 2 - (MapS::GetInstace().getWidth() - 1)*TILE_SIZE;
 
 		difference = -difference - TILE_SIZE;
 		min.x += difference;
 
-		leftBorder = min.x / TILE_SIZE;
-		view.setCenter((leftBorder + TRUEWIDTH / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
+		leftBorder = (min.x) / TILE_SIZE;
+		view.setCenter((leftBorder + (TRUEWIDTH) / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
 	}
 	else if (leftBorder == 0)
+	{
 		view.move(-TILE_SIZE / 2, 0);
+	}
 
 	int upBorder = min.y / TILE_SIZE;
 	int bottomBorder = upBorder + TRUEHEIGHT - 2;
 
 	if (min.y < 0)
 	{
-		int difference = abs(min.y);
+		float difference = abs(min.y);
 		min.y += difference;
 		view.move(0, difference);
-
 		upBorder = min.y / TILE_SIZE;
 	}
 	else if (upBorder > 0 && bottomBorder - 1 < MapS::GetInstace().getHeight() - 1)
@@ -270,21 +266,23 @@ void RunScreen::updateMap()
 		view.move(0, -TILE_SIZE);
 		upBorder = min.y / TILE_SIZE;
 	}
-	else if (bottomBorder -1  >= MapS::GetInstace().getHeight() -1)
+	else if (bottomBorder - 1  >= MapS::GetInstace().getHeight() - 1)
 	{
-		int difference = view.getCenter().y + view.getSize().y / 2 - (MapS::GetInstace().getHeight() - 1)*TILE_SIZE;
+		float difference = view.getCenter().y + view.getSize().y / 2 - (MapS::GetInstace().getHeight() - 1)*TILE_SIZE;
 
 		difference = -difference - TILE_SIZE;
 		min.y += difference;
 
-		upBorder = min.y / TILE_SIZE;
-		view.setCenter(view.getCenter().x, (upBorder + TRUEHEIGHT / 2)*(TILE_SIZE+1) + TILE_SIZE);
+		upBorder = (min.y) / TILE_SIZE;
+		view.setCenter(view.getCenter().x, (upBorder + (TRUEHEIGHT) / 2)*TILE_SIZE + TILE_SIZE);
 
 		if (bottomBorder -1  == MapS::GetInstace().getHeight() -1 )
 			view.move(0, -TILE_SIZE / 2);
 	}
 	else if (upBorder == 0)
+	{
 		view.move(0, -TILE_SIZE / 2);
+	}
 
 	for (int y = 0, h = upBorder; y < TRUEHEIGHT; y++)
 	{
@@ -298,9 +296,25 @@ void RunScreen::updateMap()
 	}
 }
 
+FloatRect RunScreen::getViewPort()
+{
+	if (TRUEHEIGHT < HEIGHT - 2 && TRUEWIDTH >= WIDTH - 2)
+	{
+		return FloatRect(0.0f, (1- (float)TRUEHEIGHT/((float)HEIGHT-2))/2, 1.0f, 1.0f);
+	}
+	if (TRUEHEIGHT >= HEIGHT - 2 && TRUEWIDTH < WIDTH - 2)
+	{
+		return FloatRect((1 - (float)TRUEWIDTH / ((float)WIDTH - 2)) / 2, 0.0f, 1.0f, 1.0f);
+	}
+	if (TRUEHEIGHT < HEIGHT - 2 && TRUEWIDTH < WIDTH - 2)
+	{
+		return FloatRect((1 - (float)TRUEWIDTH / ((float)WIDTH - 2)) / 2, (1 - (float)TRUEHEIGHT / ((float)HEIGHT - 2)) / 2, 1.0f, 1.0f);
+	}
+	return FloatRect(0.0f, 0.0f, 1.0f, 1.0f);
+}
+
 void RunScreen::Draw(RenderWindow & window)
 {
-
 	for (int y = 0; y < sprite.size(); y++)
 	{
 		for (int x = 0; x < sprite[y].size(); x++)
@@ -325,7 +339,4 @@ void RunScreen::Draw(RenderWindow & window)
 	{
 		spiderM[i].draw(window);
 	}
-	
-	
 }
-

@@ -1,11 +1,8 @@
 #include "Eggs.h"
 
-
-
 Eggs::Eggs()
 {
 }
-
 
 Eggs::~Eggs()
 {

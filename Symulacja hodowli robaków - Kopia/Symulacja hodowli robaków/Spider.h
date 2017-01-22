@@ -40,7 +40,6 @@ public:
 	float maxProductiveTime;
 	float pregnacyTime;
 	float hp;
-
 private:
 	Sprite sprite;
 	float size;

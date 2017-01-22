@@ -7,17 +7,16 @@
 
 using namespace sf;
 using namespace std;
+
 class UpdateSpider
 {
 public:
 	UpdateSpider(float speed);
 	~UpdateSpider();
-
 	void update(vector <Spider> &spider, vector <Spider> &deadSpider, float deltaTime);
 
 	Face face;
 	Vector2f movement;
-
 private:
 	void moveSpider(vector <Spider> &spider,float deltaTime);
 	void checkBorderCollision(Spider &spider);
@@ -27,4 +26,3 @@ private:
 	float delta;
 	float speed;
 };
-

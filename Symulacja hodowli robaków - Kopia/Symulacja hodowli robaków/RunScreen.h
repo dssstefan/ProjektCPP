@@ -24,9 +24,9 @@ public:
 	void UnloadContent();
 	void Update(RenderWindow &window, Event event);
 	void Draw(RenderWindow &window);
-
 private:
 	void updateMap();
+	FloatRect getViewPort();
 	View view;
 	Time lastUpdate;
 	Clock time;
@@ -36,7 +36,6 @@ private:
 	int TRUEHEIGHT;
 	float push;
 	Texture texture[12];
-	//Map map;
 	vector<vector<Sprite>> sprite;
 
 	Vector2f camera;
@@ -51,4 +50,3 @@ private:
 	Food nourishment;
 	Eggs eggs;
 };
-

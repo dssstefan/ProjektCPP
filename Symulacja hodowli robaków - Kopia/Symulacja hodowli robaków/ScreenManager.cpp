@@ -3,11 +3,9 @@
 GameScreen *currentScreen;
 static GameScreen *previousScreen;
 
-
 ScreenManager::ScreenManager()
 {
 }
-
 
 ScreenManager::~ScreenManager()
 {
@@ -33,7 +31,7 @@ void ScreenManager::LoadContent(RenderWindow &window)
 
 void ScreenManager::UnloadContent()
 {
-
+	currentScreen->UnloadContent();
 }
 
 void ScreenManager::Update(RenderWindow &window, Event event)
@@ -51,11 +49,8 @@ void ScreenManager::AddScreen(GameScreen * screen, RenderWindow &window)
 	if (previousScreen != nullptr)
 	{
 		previousScreen->UnloadContent();
-		//delete previousScreen;
 	}
-	//currentScreen->UnloadContent();
 	previousScreen = currentScreen;
-	//delete currentScreen;
 	currentScreen = screen;
 	currentScreen->LoadContent(window);
 }

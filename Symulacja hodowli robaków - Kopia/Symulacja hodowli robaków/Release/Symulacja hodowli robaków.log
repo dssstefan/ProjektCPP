@@ -1,0 +1,119 @@
+﻿  Animation.cpp
+  Collider.cpp
+  CreateSpiders.cpp
+CreateSpiders.cpp(41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+CreateSpiders.cpp(48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+CreateSpiders.cpp(94): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  EditMapScreen.cpp
+EditMapScreen.cpp(13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(13): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+EditMapScreen.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(103): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(104): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(119): warning C4018: '<': signed/unsigned mismatch
+EditMapScreen.cpp(121): warning C4018: '<': signed/unsigned mismatch
+EditMapScreen.cpp(128): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(132): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(137): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(139): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+EditMapScreen.cpp(141): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(147): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(151): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(153): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(156): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(162): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(167): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(169): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+EditMapScreen.cpp(171): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(177): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(181): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(183): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+EditMapScreen.cpp(186): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Eggs.cpp
+Eggs.cpp(28): warning C4018: '<': signed/unsigned mismatch
+  Food.cpp
+Food.cpp(10): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(59): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(61): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(72): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Food.cpp(80): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(100): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Food.cpp(101): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Food.cpp(102): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Food.cpp(103): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+Food.cpp(105): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(107): warning C4018: '<': signed/unsigned mismatch
+Food.cpp(113): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  GameScreen.cpp
+  main.cpp
+main.cpp(11): warning C4244: 'argument': conversion from 'const float' to 'unsigned int', possible loss of data
+  MapS.cpp
+MapS.cpp(43): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+MapS.cpp(215): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  Options.cpp
+  PauseScreen.cpp
+PauseScreen.cpp(35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+PauseScreen.cpp(36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+PauseScreen.cpp(45): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+PauseScreen.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  RunScreen.cpp
+RunScreen.cpp(13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(13): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+RunScreen.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(59): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(64): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(124): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(137): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(150): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(152): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+RunScreen.cpp(166): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+RunScreen.cpp(169): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(176): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(178): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(185): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(191): warning C4305: '-=': truncation from 'double' to 'float'
+RunScreen.cpp(197): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+RunScreen.cpp(200): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+RunScreen.cpp(203): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(217): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(221): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(230): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(236): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(245): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(253): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(261): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(267): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(276): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+RunScreen.cpp(318): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(320): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(326): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(333): warning C4018: '<': signed/unsigned mismatch
+RunScreen.cpp(338): warning C4018: '<': signed/unsigned mismatch
+  ScreenManager.cpp
+  SettingsScreen.cpp
+SettingsScreen.cpp(36): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+SettingsScreen.cpp(37): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+SettingsScreen.cpp(46): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+SettingsScreen.cpp(47): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Spider.cpp
+Spider.cpp(5): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(6): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(7): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(9): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(111): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+Spider.cpp(117): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+Spider.cpp(121): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  MenuScreen.cpp
+  UpdateSpider.cpp
+UpdateSpider.cpp(26): warning C4018: '<': signed/unsigned mismatch
+UpdateSpider.cpp(43): warning C4018: '<': signed/unsigned mismatch
+UpdateSpider.cpp(64): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  All 1105 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Release\Symulacja hodowli robaków.exe
+  Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Release\Symulacja hodowli robaków.pdb (Full PDB)

@@ -5,7 +5,6 @@
 using namespace std;
 using namespace sf;
 
-
 class GameScreen
 {
 public:
@@ -17,4 +16,3 @@ public:
 	virtual void Update(RenderWindow &window, Event event);
 	virtual void Draw(RenderWindow &window);
 };
-

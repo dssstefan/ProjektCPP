@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 Collider::Collider(Sprite& sprite)
 	:body(sprite)
 {
@@ -65,10 +64,8 @@ bool Collider::CheckCollision(Collider & other, float push)
 				other.Move(0.0f, intersectY * push);
 			}
 		}
-
 		return true;
 	}
-
 	return false;
 }
 
@@ -79,7 +76,6 @@ void Collider::Move(float dx, float dy)
 
 sf::Vector2f Collider::GetPosition()
 {
-	//Vector2f position(body.getPosition().x - 32, body.getPosition().y - 32);
 	return body.getPosition();
 }
 sf::Vector2f Collider::GetHalfSize()

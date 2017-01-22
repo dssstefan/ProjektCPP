@@ -1,11 +1,8 @@
 #include "Animation.h"
 
-
-
 Animation::Animation()
 {
 }
-
 
 Animation::~Animation()
 {
@@ -13,7 +10,6 @@ Animation::~Animation()
 
 void Animation::update(float deltaTime, Face face)
 {
-
 	currentImage.y = face;
 	totalTime += deltaTime;
 
@@ -21,7 +17,6 @@ void Animation::update(float deltaTime, Face face)
 	{
 		totalTime -= switchTime;
 		currentImage.x++;
-
 		if (currentImage.x >= imageCount.x)
 		{
 			currentImage.x = 0;
@@ -30,7 +25,6 @@ void Animation::update(float deltaTime, Face face)
 
 	uvRect.left = currentImage.x * uvRect.width;
 	uvRect.top = currentImage.y * uvRect.height;
-
 }
 
 void Animation::dead(float deltaTime)

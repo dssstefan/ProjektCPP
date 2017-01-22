@@ -1,11 +1,9 @@
 #include "Food.h"
 #include <random>
 
-
 Food::Food()
 {
 }
-
 
 Food::~Food()
 {
@@ -89,9 +87,7 @@ void Food::update(float deltaTime)
 				foodsInCd.pop_back();
 				i--;
 			}
-
 		}
-
 	}
 }
 
@@ -101,7 +97,6 @@ int Food::isEating(Spider spider, float cooldown)
 	Vector2f size(spider.getGlobalBounds().width, spider.getGlobalBounds().height);
 
 	int eat = 0;
-
 	int jmin = (int)corner.x / TILE_SIZE;
 	int jmax = (int)corner.x / TILE_SIZE + size.x / TILE_SIZE;
 	int imin = (int)corner.y / TILE_SIZE;
@@ -121,6 +116,5 @@ int Food::isEating(Spider spider, float cooldown)
 			}
 		}
 	}
-
 	return eat;
 }

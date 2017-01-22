@@ -26,5 +26,4 @@ private:
 	Text exit;
 	vector <RectangleShape> vPlus;
 	vector <RectangleShape> vMinus;
-
 };

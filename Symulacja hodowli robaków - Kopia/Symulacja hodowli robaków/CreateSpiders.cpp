@@ -9,7 +9,6 @@ CreateSpiders::CreateSpiders()
 	numberS = *optionsVar[2];
 }
 
-
 CreateSpiders::~CreateSpiders()
 {
 }

@@ -125,7 +125,6 @@
     <ClCompile Include="Eggs.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameScreen.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapS.cpp" />
     <ClCompile Include="Options.cpp" />
@@ -146,7 +145,6 @@
     <ClInclude Include="Eggs.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="GameScreen.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="MapS.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="PauseScreen.h" />

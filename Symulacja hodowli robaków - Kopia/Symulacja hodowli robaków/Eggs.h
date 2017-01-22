@@ -20,6 +20,4 @@ public:
 	};
 
 	vector<Egg> eggs;
-
 };
-

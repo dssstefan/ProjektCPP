@@ -1,11 +1,9 @@
 #include "SettingsScreen.h"
 #include "const.h"
 
-
 SettingsScreen::SettingsScreen()
 {
 }
-
 
 SettingsScreen::~SettingsScreen()
 {
@@ -100,7 +98,6 @@ void SettingsScreen::UnloadContent()
 
 void SettingsScreen::Update(RenderWindow &window, Event event)
 {
-
 	Vector2f mouse(Mouse::getPosition(window));
 	if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == Mouse::Left)
 	{
@@ -224,17 +221,12 @@ void SettingsScreen::Update(RenderWindow &window, Event event)
 		{
 			minus[i].setFillColor(Color::Green);
 			vMinus[i].setOutlineColor(Color::Green);
-
 		}
-
-
 		if (vPlus[i].getGlobalBounds().contains(mouse))
 		{
 			plus[i].setFillColor(Color::Green);
 			vPlus[i].setOutlineColor(Color::Green);
-
 		}
-
 	}
 
 	if (returnToMenu.getGlobalBounds().contains(mouse))
@@ -273,7 +265,6 @@ void SettingsScreen::Draw(RenderWindow & window)
 	{
 		window.draw(assistant[i]);
 	}
-
 	window.draw(returnToMenu);
 	window.draw(editMap);
 	window.draw(exit);

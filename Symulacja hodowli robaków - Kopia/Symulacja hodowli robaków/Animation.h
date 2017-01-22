@@ -14,11 +14,9 @@ public:
 	void dead(float deltaTime);
 	void setAnimation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
 	IntRect uvRect;
-
 private:
 	Vector2u imageCount;
 	Vector2u currentImage;
 	float totalTime;
 	float switchTime;
 };
-

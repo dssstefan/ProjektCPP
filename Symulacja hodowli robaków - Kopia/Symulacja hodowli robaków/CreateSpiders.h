@@ -15,12 +15,8 @@ public:
 	void createSpiders( vector <Spider> &spiderM, vector <Spider> &spiderF, unsigned short x, unsigned short y);
 	void addSpiders(vector <Spider> &spiderM, vector <Spider> &spiderF, Vector2f position, int number);
 	Spider addOneSpider(bool isMale, Vector2f position);
-
 private:
 	Texture tSpiderM;
 	Texture tSpiderF;
 	int numberS;
-
-	
 };
-

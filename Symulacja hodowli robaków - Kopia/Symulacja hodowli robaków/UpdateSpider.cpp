@@ -60,8 +60,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime)
 	uniform_int_distribution<int> distribution(1, 4);
 	uniform_int_distribution<int> distribution2(1, 50);
 	int random = 0;
-	/*float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
-	cout<<time.getElapsedTime().asSeconds() <<"  "<< lastUpdate.asSeconds()<< endl;*/
+
 	for (int i = 0; i < spider.size(); i++)
 	{
 		movement.x = 0.0f;
@@ -69,13 +68,10 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime)
 
 		if (spider[i].wait == 0)
 		{
-
 			random = distribution(generator);
 			spider[i].random = random;
-
 			random = distribution2(generator);
 			spider[i].wait = random;
-			
 		}
 		else
 			spider[i].wait--;
@@ -102,10 +98,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime)
 
 		movement = spider[i].getMovement();
 		spider[i].move(movement.x, movement.y, deltaTime, checkFace(movement));
-	
-
 	}
-	//lastUpdate = time.getElapsedTime();
 }
 
 void UpdateSpider::checkBorderCollision(Spider& spider)
@@ -133,24 +126,17 @@ void UpdateSpider::checkBorderCollision(Spider& spider)
 		spider.setPosition(spider.getX(), MapS::GetInstace().getHeight()*TILE_SIZE - 64);
 		spider.setMovement(movement.x, -movement.y);
 	}
-
-
-
 }
 
 Face UpdateSpider::checkFace(Vector2f movement)
 {
 	if (movement.y >= movement.x && movement.y >= -movement.x)
 		return UP;
-
 	if (movement.y >= movement.x && movement.y <= -movement.x)
 		return LEFT;
-
 	if (movement.y <= movement.x && movement.y <= -movement.x)
 		return DOWN;
-
 	if (movement.y <= movement.x && movement.y >= -movement.x)
 		return RIGHT;
-
 	return DOWN;
 }

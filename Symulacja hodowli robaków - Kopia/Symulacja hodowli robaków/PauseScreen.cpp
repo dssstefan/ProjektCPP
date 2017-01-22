@@ -1,11 +1,9 @@
 #include "PauseScreen.h"
 #include "const.h"
 
-
 PauseScreen::PauseScreen()
 {
 }
-
 
 PauseScreen::~PauseScreen()
 {
@@ -228,17 +226,13 @@ void PauseScreen::Update(RenderWindow &window, Event event)
 		{
 			minus[i].setFillColor(Color::Green);
 			vMinus[i].setOutlineColor(Color::Green);
-
 		}
-
 
 		if (vPlus[i].getGlobalBounds().contains(mouse))
 		{
 			plus[i].setFillColor(Color::Green);
 			vPlus[i].setOutlineColor(Color::Green);
-
 		}
-
 	}
 
 	if (returnToMenu.getGlobalBounds().contains(mouse))
@@ -272,7 +266,6 @@ void PauseScreen::Draw(RenderWindow & window)
 	{
 		window.draw(assistant[i]);
 	}
-
 	window.draw(returnToMenu);
 	window.draw(editMap);
 	window.draw(exit);

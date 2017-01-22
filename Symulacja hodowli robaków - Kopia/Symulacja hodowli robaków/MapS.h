@@ -40,4 +40,3 @@ private:
 	MapS();
 	MapS(MapS const&);
 };
-

@@ -1,7 +1,5 @@
 #include "Spider.h"
 
-
-
 Spider::Spider()
 {
 	hp = *optionsVar[4];

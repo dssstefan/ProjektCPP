@@ -17,4 +17,3 @@ private:
 	Text title;
 	Text text[3];
 };
-

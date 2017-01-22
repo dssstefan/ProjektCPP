@@ -1,13 +1,11 @@
 #include "MapS.h"
 #include <fstream>
 
-
 MapS::MapS()
 {
 	width = 0;
 	height = 0;
 }
-
 
 MapS & MapS::GetInstace()
 {
@@ -176,7 +174,6 @@ void MapS::updateMap()
 	default:
 		break;
 	}
-
 	height = *optionsVar[1];
 	width = *optionsVar[0];
 }
@@ -214,7 +211,6 @@ void MapS::updateTileC()
 			if (tileMap[y][x].collideable)
 				{
 				Sprite tileSprite;
-
 				tileSprite.setTexture(t);
 				tileSprite.setTextureRect(IntRect(0, 0, TILE_SIZE, TILE_SIZE));
 				tileSprite.setPosition(TILE_SIZE * x, TILE_SIZE * y);
@@ -263,6 +259,5 @@ MapS::Tile MapS::getTile(short code)
 		tile.interactable = true;
 		break;
 	}
-
 	return tile;
 }

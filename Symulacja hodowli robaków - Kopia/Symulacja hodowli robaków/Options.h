@@ -23,7 +23,4 @@ private:
 	static int lifeTime;
 	static int minProductiveTime;
 	static int maxProductiveTime;
-
-	
 };
-
