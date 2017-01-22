@@ -1,10 +1,14 @@
-﻿  Skipping... (no relevant changes detected)
-  main.cpp
-  SettingsScreen.cpp
-  ScreenManager.cpp
-  RunScreen.cpp
-  PauseScreen.cpp
-  MenuScreen.cpp
-  Food.cpp
+﻿  Spider.cpp
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(7): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(9): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(10): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(11): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(114): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(120): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(121): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(122): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(123): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\spider.cpp(124): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

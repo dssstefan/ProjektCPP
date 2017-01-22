@@ -11,6 +11,8 @@ ScreenManager::ScreenManager()
 
 ScreenManager::~ScreenManager()
 {
+	delete previousScreen;
+	delete currentScreen;
 }
 
 ScreenManager & ScreenManager::GetInstance()

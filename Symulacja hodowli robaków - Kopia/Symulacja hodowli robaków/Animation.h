@@ -11,6 +11,7 @@ public:
 	Animation();
 	~Animation();
 	void update(float deltaTime, Face face);
+	void dead(float deltaTime);
 	void setAnimation(sf::Texture* texture, sf::Vector2u imageCount, float switchTime);
 	IntRect uvRect;
 

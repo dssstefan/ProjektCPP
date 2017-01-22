@@ -26,6 +26,5 @@ private:
 
 	ScreenManager();
 	ScreenManager(ScreenManager const&);
-	void operator=(ScreenManager const&);
 };
 

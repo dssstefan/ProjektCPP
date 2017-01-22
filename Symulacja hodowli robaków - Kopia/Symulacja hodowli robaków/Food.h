@@ -12,7 +12,7 @@ public:
 	void generateFood(Map &map);
 	void draw(RenderWindow &window);
 	void eaten(int i, int j, int cooldown);
-	void update();
+	void update(float deltaTime);
 	int isEating(Spider spider, float cooldown);
 
 	struct Circle: Options {
@@ -24,8 +24,5 @@ public:
 	vector <vector <Circle>> foods;
 	vector <Circle*> foodsInCd;
 
-private:
-	Time lastUpdate;
-	Clock time;
 };
 

@@ -8,6 +8,9 @@ UpdateSpider::UpdateSpider(float speed)
 	movement.x = 0.0f;
 	movement.y = 0.0f;
 	face = DOWN;
+	lastUpdate = Time::Zero;
+	delta = 0.0f;
+
 }
 
 
@@ -15,21 +18,50 @@ UpdateSpider::~UpdateSpider()
 {
 }
 
-void UpdateSpider::update(vector <Spider> &spider, float deltaTime, Map map)
+void UpdateSpider::update(vector <Spider> &spider, vector <Spider> &deadSpider, float deltaTime, Map map)
 {
-	
-	moveSpider(spider, map);
+	time.restart();
+	moveSpider(spider, deltaTime, map);
+	deltaTime += time.getElapsedTime().asSeconds();
+	for (int i = 0; i < spider.size(); i++)
+	{
+		spider[i].lifeTime -= deltaTime;
+		spider[i].hp -= deltaTime;
+		if(spider[i].lifeTime <= 0 || spider[i].hp <= 0)
+		{
+			deadSpider.push_back(spider[i]);
+			spider[i] = spider[spider.size() - 1];
+			spider.pop_back();
+		}
+		else
+		{
+			spider[i].minProductiveTime -= deltaTime;
+			spider[i].maxProductiveTime -= deltaTime;
+		}
+	}
 
+	for (int i = 0; i < deadSpider.size(); i++)
+	{
+		deadSpider[i].lifeTime -= deltaTime;
+		deadSpider[i].death(deltaTime);
+
+		if (deadSpider[i].lifeTime <= -5)
+		{
+			deadSpider[i] = deadSpider[deadSpider.size() - 1];
+			deadSpider.pop_back();
+		}
+	}
 }
 
-void UpdateSpider::moveSpider(vector<Spider>& spider, Map map)
+void UpdateSpider::moveSpider(vector<Spider>& spider, float deltaTime, Map map)
 {
 
 	random_device generator;
 	uniform_int_distribution<int> distribution(1, 4);
 	uniform_int_distribution<int> distribution2(1, 50);
 	int random = 0;
-	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+	/*float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+	cout<<time.getElapsedTime().asSeconds() <<"  "<< lastUpdate.asSeconds()<< endl;*/
 	for (int i = 0; i < spider.size(); i++)
 	{
 		movement.x = 0.0f;
@@ -73,7 +105,7 @@ void UpdateSpider::moveSpider(vector<Spider>& spider, Map map)
 	
 
 	}
-	lastUpdate = time.getElapsedTime();
+	//lastUpdate = time.getElapsedTime();
 }
 
 void UpdateSpider::checkBorderCollision(Spider& spider, Map map)

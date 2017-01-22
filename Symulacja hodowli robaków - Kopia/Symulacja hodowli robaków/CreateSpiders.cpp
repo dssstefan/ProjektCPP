@@ -30,7 +30,8 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 		spiderM[i].setPosition(randomX(generator) * TILE_SIZE, randomY(generator) * TILE_SIZE);
 		spiderF[i].setPosition(randomX(generator) * TILE_SIZE, randomY(generator) * TILE_SIZE);
 		spiderF[i].setMale(false);
-		
+		spiderF[i].pregnacyTime = 5;
+
 		spiderM[i].setTexture(tSpiderM);
 		spiderF[i].setTexture(tSpiderF);
 
@@ -40,7 +41,7 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 		spiderM[i].setTextureRect(sf::IntRect(spiderM[i].textureSize.x * 0, spiderM[i].textureSize.y * 2, spiderM[i].textureSize.x, spiderM[i].textureSize.y));
 		spiderM[i].setMovement(rmovement(generator)/100, rmovement(generator)/100);
 		spiderM[i].animation.setAnimation(&tSpiderM, Vector2u(7, 5), 0.03f);
-
+		
 		spiderF[i].textureSize = tSpiderF.getSize();
 		spiderF[i].textureSize.x /= 7;
 		spiderF[i].textureSize.y /= 5;

@@ -9,6 +9,7 @@
 #include "Food.h"
 #include "const.h"
 #include "Options.h"
+#include "Eggs.h"
 
 using namespace std;
 using namespace sf;
@@ -25,9 +26,7 @@ public:
 	void Draw(RenderWindow &window);
 
 private:
-	void setMap(string string, RenderWindow &window);
 	void updateMap();
-	void update(float);
 	View view;
 	Time lastUpdate;
 	Clock time;
@@ -35,6 +34,7 @@ private:
 	int HEIGHT;
 	int TRUEWIDTH;
 	int TRUEHEIGHT;
+	float push;
 	Texture texture[12];
 	Map map;
 	vector<vector<Sprite>> sprite;
@@ -44,8 +44,11 @@ private:
 	CreateSpiders createSpiders;
 	vector <Spider> spiderM;
 	vector <Spider> spiderF;
+	vector <Spider> deadSpider;
+	vector <Spider*> spiderInPregnacy;
 
 	UpdateSpider updatespider;
 	Food nourishment;
+	Eggs eggs;
 };
 

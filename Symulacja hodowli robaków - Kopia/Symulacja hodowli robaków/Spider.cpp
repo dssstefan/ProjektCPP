@@ -8,6 +8,8 @@ Spider::Spider()
 	lifeTime = *optionsVar[7];
 	minProductiveTime = *optionsVar[8];
 	maxProductiveTime = *optionsVar[9];
+	size = *optionsVar[6];
+	size /= 100;
 	texture = NULL;
 	isMale = true;
 	textureSize.x = 0;
@@ -16,6 +18,8 @@ Spider::Spider()
 	random = 0;
 	movement.x = 0;
 	movement.y = 0;
+	maxMovement = 1;
+	pregnacyTime = 0;
 }
 
 Spider::~Spider()
@@ -32,6 +36,12 @@ void Spider::move(float x, float y, float deltaTime, Face face)
 void Spider::move(float x, float y)
 {
 	sprite.move(x, y);
+}
+
+void Spider::death(float deltaTime)
+{
+	animation.dead(deltaTime);
+	sprite.setTextureRect(animation.uvRect);
 }
 
 void Spider::setPosition(float x, float y)
@@ -55,15 +65,15 @@ void Spider::addMovement(float x, float y)
 	movement.x += x;
 	movement.y += y;
 
-	if (movement.x > 3)
-		movement.x = 3;
-	else if (movement.x < -3)
-		movement.x = -3;
+	if (movement.x > maxMovement)
+		movement.x = maxMovement;
+	else if (movement.x < -maxMovement)
+		movement.x = -maxMovement;
 
-	if (movement.y > 3)
-		movement.y = 3;
-	else if (movement.y < -3)
-		movement.y = -3;
+	if (movement.y > maxMovement)
+		movement.y = maxMovement;
+	else if (movement.y < -maxMovement)
+		movement.y = -maxMovement;
 
 }
 
@@ -72,15 +82,15 @@ void Spider::setMovement(float x, float y)
 	movement.x = x;
 	movement.y = y;
 
-	if (movement.x > 3)
-		movement.x = 3;
-	else if (movement.x < -3)
-		movement.x = -3;
+	if (movement.x > maxMovement)
+		movement.x = maxMovement;
+	else if (movement.x < -maxMovement)
+		movement.x = -maxMovement;
 
-	if (movement.y > 3)
-		movement.y = 3;
-	else if (movement.y < -3)
-		movement.y = -3;
+	if (movement.y > maxMovement)
+		movement.y = maxMovement;
+	else if (movement.y < -maxMovement)
+		movement.y = -maxMovement;
 
 	wait = 0;
 }
@@ -93,6 +103,25 @@ sf::Vector2f Spider::getMovement()
 void Spider::draw(sf::RenderWindow &window)
 {
 	window.draw(sprite);
+}
+
+void Spider::grow(int count)
+{
+	updateOptions();
+	if (sprite.getScale().x < size)
+	{
+		sprite.setScale(sprite.getScale().x + count *0.01, sprite.getScale().y + count *0.01);
+	}
+}
+
+void Spider::updateOptions()
+{
+	hp = *optionsVar[4];
+	lifeTime = *optionsVar[7];
+	minProductiveTime = *optionsVar[8];
+	maxProductiveTime = *optionsVar[9];
+	size = *optionsVar[6];
+	size /= 100;
 }
 
 void Spider::setMale(bool t)

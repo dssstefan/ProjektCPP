@@ -9,6 +9,10 @@ Food::Food()
 
 Food::~Food()
 {
+	for (int i = 0; i < foodsInCd.size(); i++)
+	{
+		delete foodsInCd[i];
+	}
 }
 
 void Food::generateFood(Map &map)
@@ -69,9 +73,8 @@ void Food::eaten(int i, int j, int cooldown)
 	foodsInCd.push_back(&foods[i][j]);
 }
 
-void Food::update()
+void Food::update(float deltaTime)
 {
-	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	if (foodsInCd.size() > 0)
 	{
 		for (int i = 0; i < foodsInCd.size(); i++)
@@ -88,7 +91,6 @@ void Food::update()
 		}
 
 	}
-	lastUpdate = time.getElapsedTime();
 }
 
 int Food::isEating(Spider spider, float cooldown)

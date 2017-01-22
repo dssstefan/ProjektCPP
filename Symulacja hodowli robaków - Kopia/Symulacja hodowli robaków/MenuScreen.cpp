@@ -46,7 +46,6 @@ void MenuScreen::UnloadContent()
 
 void MenuScreen::Update(RenderWindow &window, Event event)
 {
-	input.Update(window, event);
 	Vector2f mouse(sf::Mouse::getPosition(window));
 
 	for (int i = 0; i < 3; i++)

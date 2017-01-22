@@ -33,6 +33,26 @@ void Animation::update(float deltaTime, Face face)
 
 }
 
+void Animation::dead(float deltaTime)
+{
+	currentImage.y = 4;
+	totalTime += deltaTime;
+
+	if (totalTime >= switchTime)
+	{
+		totalTime -= switchTime;
+		currentImage.x++;
+
+		if (currentImage.x + 1 > 3)
+		{
+			currentImage.x = 3;
+		}
+	}
+
+	uvRect.left = currentImage.x * uvRect.width;
+	uvRect.top = currentImage.y * uvRect.height;
+}
+
 void Animation::setAnimation(sf::Texture * texture, sf::Vector2u imageCount, float switchTime)
 {
 	this->imageCount = imageCount;

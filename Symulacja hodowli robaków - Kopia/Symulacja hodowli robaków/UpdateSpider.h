@@ -13,18 +13,18 @@ public:
 	UpdateSpider(float speed);
 	~UpdateSpider();
 
-	void update(vector <Spider> &spider, float deltaTime, Map map);
+	void update(vector <Spider> &spider, vector <Spider> &deadSpider, float deltaTime, Map map);
 
 	Face face;
 	Vector2f movement;
 
 private:
-	void moveSpider(vector <Spider> &spider, Map map);
+	void moveSpider(vector <Spider> &spider,float deltaTime, Map map);
 	void checkBorderCollision(Spider &spider, Map map);
 	Face checkFace(Vector2f movement);
-	Clock time;
 	Time lastUpdate;
-
+	Clock time;
+	float delta;
 	float speed;
 };
 

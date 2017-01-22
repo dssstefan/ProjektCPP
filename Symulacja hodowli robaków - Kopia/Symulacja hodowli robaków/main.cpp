@@ -1,8 +1,10 @@
+#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ScreenManager.h"
 #include "const.h"
 using namespace sf;
+
 /*
 void ResizedView(const sf::RenderWindow& window, sf::View& view)
 {
@@ -20,12 +22,13 @@ int main()
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
 	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
 	window.setView(view);
+	window.setFramerateLimit(240);
+
 	ScreenManager::GetInstance().Initialize();
 	ScreenManager::GetInstance().LoadContent(window);
 
 	while (window.isOpen())
 	{
-		
 		Event event;
 		if(window.pollEvent(event))
 		{
@@ -40,8 +43,8 @@ int main()
 
 		ScreenManager::GetInstance().Update(window, event);
 		ScreenManager::GetInstance().Draw(window);
-
 		window.display();
+
 	}
 
 	return 0;

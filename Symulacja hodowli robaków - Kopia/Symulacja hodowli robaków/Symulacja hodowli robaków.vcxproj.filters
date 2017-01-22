@@ -54,9 +54,6 @@
     <ClCompile Include="SettingsScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Screen</Filter>
-    </ClCompile>
     <ClCompile Include="MenuScreen.cpp">
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
@@ -67,6 +64,9 @@
       <Filter>Source Files\Screen</Filter>
     </ClCompile>
     <ClCompile Include="Options.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Eggs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,9 +104,6 @@
     <ClInclude Include="SettingsScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Screen</Filter>
-    </ClInclude>
     <ClInclude Include="MenuScreen.h">
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
@@ -117,6 +114,9 @@
       <Filter>Header Files\Screen</Filter>
     </ClInclude>
     <ClInclude Include="Options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Eggs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

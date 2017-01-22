@@ -1,12 +1,10 @@
 #include "RunScreen.h"
 
-
-
-RunScreen::RunScreen() :updatespider(50.0f + 100.0f*(*optionsVar[2] % 15))
+RunScreen::RunScreen() :updatespider(100.0f)
 {
+	push = 0.0f;
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
 	view.setCenter(SCRN_WIDTH / 2, SCRN_HEIGHT / 2);
-	
 
 	for (int y = 0, i = 0; y < 4; y++)
 	{
@@ -46,16 +44,8 @@ RunScreen::RunScreen() :updatespider(50.0f + 100.0f*(*optionsVar[2] % 15))
 
 	camera = Vector2f((map.getWidth() / 2)*TILE_SIZE, (map.getHeight() / 2)*TILE_SIZE);
 
-	
-	/*if (!map.loadFromFile())
-	{
-		cout << "Problem z za³adowaniem mapy!";
-		return;
-	}*/
-	
 	createSpiders.createSpiders(spiderM, spiderF, map.getWidth()-1, map.getHeight()-1);
 	nourishment.generateFood(map);
-	
 }
 
 
@@ -65,7 +55,18 @@ RunScreen::~RunScreen()
 
 void RunScreen::LoadContent(RenderWindow &window)
 {
+	time.restart();
 	lastUpdate = Time::Zero;
+
+	for (int i = 0; i < spiderM.size(); i++)
+	{
+		spiderM[i].updateOptions();
+	}
+
+	for (int i = 0; i < spiderF.size(); i++)
+	{
+		spiderF[i].updateOptions();
+	}
 	updateMap();
 	window.setView(view);
 }
@@ -77,7 +78,7 @@ void RunScreen::UnloadContent()
 
 void RunScreen::Update(RenderWindow & window, Event event)
 {
-	
+
 	if (event.type == Event::Closed)
 		window.close();
 	if (event.type == Event::KeyPressed)
@@ -111,29 +112,19 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			view.move(0, TILE_SIZE);
 		}
 	}
-	
 
 	updateMap();
 	window.setView(view);
 
 	float deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
-	update(deltaTime);
-	
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
-			ScreenManager::GetInstance().AddScreen(new PauseScreen, window);
+	updatespider.update(spiderM, deadSpider, deltaTime, map);
+	updatespider.update(spiderF, deadSpider, deltaTime, map);
 
+	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+	nourishment.update(deltaTime);
 	lastUpdate = time.getElapsedTime();
-}
+	
 
-
-void RunScreen::update(float deltaTime)
-{
-	float push = 0.0f;
-
-	updatespider.update(spiderM, deltaTime, map);
-	updatespider.update(spiderF, deltaTime, map);
-	nourishment.update();
 	for (int i = 0; i < spiderM.size(); i++)
 	{
 		for (int j = 0; j < spiderM.size(); j++)
@@ -148,12 +139,21 @@ void RunScreen::update(float deltaTime)
 			if (i == j) {
 				continue;
 			}
-			spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
+			if (spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f) )
+			{
+				if (spiderF[j].pregnacyTime >= 5 && spiderF[j].minProductiveTime <= 0 && spiderF[j].maxProductiveTime <= 0 && spiderM[i].minProductiveTime <= 0 && spiderM[i].maxProductiveTime >= 0)
+				{
+					spiderInPregnacy.push_back(&spiderF[i]);
+					eggs.addEgg(spiderF[i].getX(), spiderF[i].getY());
+				}
+			}
+			
 		}
 		int eat = nourishment.isEating(spiderM[i], *optionsVar[5]);
-		for (int k = 1; k <= eat; k++)
+		if (eat > 0)
 		{
-			//JEDZENIE
+			spiderM[i].hp = *optionsVar[4];
+			spiderM[i].grow(eat);
 		}
 		for (int j = 0; j < map.tileC.size(); j++)
 		{
@@ -176,26 +176,32 @@ void RunScreen::update(float deltaTime)
 			if (i == j) {
 				continue;
 			}
-			spiderF[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
+			if(spiderF[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f))
+			{
+				if (spiderF[i].pregnacyTime >= 5 && spiderF[i].minProductiveTime <= 0 && spiderF[i].maxProductiveTime <= 0 && spiderM[j].minProductiveTime <= 0 && spiderM[j].maxProductiveTime >= 0)
+				{
+					spiderInPregnacy.push_back(&spiderF[i]);
+					eggs.addEgg(spiderF[i].getX(), spiderF[i].getY());
+				}
+			}
 		}
 		int eat = nourishment.isEating(spiderF[i], *optionsVar[5]);
-		for (int k = 1; k <= eat; k++)
+		if (eat > 0)
 		{
-			//JEDZENIE
+			spiderF[i].hp = *optionsVar[4];
+			spiderF[i].grow(eat);
 		}
 		for (int j = 0; j < map.tileC.size(); j++)
 		{
-			if(spiderF[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f))
+			if (spiderF[i].getCollider().CheckCollision(map.getCollider(map.tileC[j]), 0.0f))
 				spiderF[i].setMovement(-spiderF[i].getMovement().x, -spiderF[i].getMovement().y);
 		}
 
 	}
-}
 
-void RunScreen::setMap(string string, RenderWindow &window)
-{
-	updateMap();
-	window.setView(view);
+	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
+			ScreenManager::GetInstance().AddScreen(new PauseScreen, window);
 }
 
 void RunScreen::updateMap()
@@ -289,14 +295,24 @@ void RunScreen::Draw(RenderWindow & window)
 	}
 
 	nourishment.draw(window);
+
+	for (int i = 0; i < deadSpider.size(); i++)
+	{
+		deadSpider[i].draw(window);
+	}
+
+	eggs.draw(window);
+
 	for (int i = 0; i < spiderF.size(); i++)
 	{
 		spiderF[i].draw(window);
 	}
+
 	for (int i = 0; i < spiderM.size(); i++)
 	{
 		spiderM[i].draw(window);
 	}
+	
 	
 }
 
