@@ -117,9 +117,9 @@ void Spider::grow(int count)
 void Spider::updateOptions()
 {
 	hp = *optionsVar[4];
-	lifeTime = *optionsVar[7];
+	/*lifeTime = *optionsVar[7];
 	minProductiveTime = *optionsVar[8];
-	maxProductiveTime = *optionsVar[9];
+	maxProductiveTime = *optionsVar[9];*/
 	size = *optionsVar[6];
 	size /= 100;
 }

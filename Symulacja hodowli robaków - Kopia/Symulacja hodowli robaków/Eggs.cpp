@@ -14,8 +14,8 @@ Eggs::~Eggs()
 void Eggs::addEgg(float x, float y)
 {
 	CircleShape egg;
-	egg.setPosition(Vector2f(x + 16, y + 16));
-	egg.setRadius(10.0f);
+	egg.setPosition(Vector2f(x + 21, y + 21));
+	egg.setRadius(15.0f);
 	egg.setOutlineThickness(3.0f);
 	egg.setFillColor(Color::White);
 	egg.setOutlineColor(Color(200, 200, 200));

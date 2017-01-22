@@ -122,6 +122,32 @@ void RunScreen::Update(RenderWindow & window, Event event)
 
 	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	nourishment.update(deltaTime);
+
+	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
+	for (int i = 0; i < spiderInPregnacy.size(); i++)
+	{
+		spiderInPregnacy[i]->pregnacyTime -= deltaTime;
+		
+		if (spiderInPregnacy[i]->pregnacyTime <= 0)
+		{
+			spiderInPregnacy[i]->pregnacyTime = 5;
+			spiderInPregnacy[i] = spiderInPregnacy[spiderInPregnacy.size() - 1];
+			spiderInPregnacy.pop_back();
+			i--;
+		}
+	}
+
+	for (int i = 0; i < eggs.eggs.size(); i++)
+	{
+		eggs.eggs[i].time -= deltaTime;
+		if (eggs.eggs[i].time <= 0)
+		{
+			createSpiders.addSpiders(spiderM, spiderF, eggs.eggs[i].shape.getPosition(), *optionsVar[3]);
+			eggs.eggs[i] = eggs.eggs[eggs.eggs.size() - 1];
+			eggs.eggs.pop_back();
+			i--;
+		}
+	}
 	lastUpdate = time.getElapsedTime();
 	
 
@@ -134,21 +160,10 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			}
 			spiderM[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
 		}
-		for (int j = 0; j < spiderF.size(); j++)
+		/*for (int j = 0; j < spiderF.size(); j++)
 		{
-			if (i == j) {
-				continue;
-			}
-			if (spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f) )
-			{
-				if (spiderF[j].pregnacyTime >= 5 && spiderF[j].minProductiveTime <= 0 && spiderF[j].maxProductiveTime <= 0 && spiderM[i].minProductiveTime <= 0 && spiderM[i].maxProductiveTime >= 0)
-				{
-					spiderInPregnacy.push_back(&spiderF[i]);
-					eggs.addEgg(spiderF[i].getX(), spiderF[i].getY());
-				}
-			}
-			
-		}
+			spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
+		}*/
 		int eat = nourishment.isEating(spiderM[i], *optionsVar[5]);
 		if (eat > 0)
 		{
@@ -173,13 +188,11 @@ void RunScreen::Update(RenderWindow & window, Event event)
 		}
 		for (int j = 0; j < spiderM.size(); j++)
 		{
-			if (i == j) {
-				continue;
-			}
 			if(spiderF[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f))
 			{
-				if (spiderF[i].pregnacyTime >= 5 && spiderF[i].minProductiveTime <= 0 && spiderF[i].maxProductiveTime <= 0 && spiderM[j].minProductiveTime <= 0 && spiderM[j].maxProductiveTime >= 0)
+				if (spiderF[i].pregnacyTime >= 5 && spiderF[i].minProductiveTime <= 0 && spiderF[i].maxProductiveTime >= 0 && spiderM[j].minProductiveTime <= 0 && spiderM[j].maxProductiveTime >= 0)
 				{
+					spiderF[i].pregnacyTime -= 0.01;
 					spiderInPregnacy.push_back(&spiderF[i]);
 					eggs.addEgg(spiderF[i].getX(), spiderF[i].getY());
 				}

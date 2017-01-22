@@ -51,7 +51,23 @@ void CreateSpiders::createSpiders(vector <Spider> &spiderM, vector <Spider> &spi
 	}
 }
 
-Spider CreateSpiders::addSpider(bool isMale, Vector2f position)
+void CreateSpiders::addSpiders(vector <Spider> &spiderM, vector <Spider> &spiderF, Vector2f position, int number)
+{
+	random_device generator;
+	uniform_int_distribution<int> one(0, 1);
+
+	for (int i = 0; i < number; i++)
+	{
+		if (one(generator))
+		{
+			spiderM.push_back(addOneSpider(1, position));
+		}
+		else
+			spiderF.push_back(addOneSpider(0, position));
+	}
+}
+
+Spider CreateSpiders::addOneSpider(bool isMale, Vector2f position)
 {
 	random_device generator;
 	uniform_int_distribution<int> rmovement(0, 100);
@@ -69,6 +85,7 @@ Spider CreateSpiders::addSpider(bool isMale, Vector2f position)
 	{
 		newSpider.setTexture(tSpiderF);
 		newSpider.textureSize = tSpiderF.getSize();
+		newSpider.pregnacyTime = 5;
 	}
 
 	newSpider.textureSize.x /= 7;
