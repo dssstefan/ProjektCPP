@@ -55,17 +55,17 @@ void MapS::updateMap()
 	int x = 0;
 	if (width != *optionsVar[0] || height != *optionsVar[1])
 	{
-		if (width >= *optionsVar[0] && height >= *optionsVar[1])
+		if (width <= *optionsVar[0] && height <= *optionsVar[1])
 			x = 1;
-		else if (width == *optionsVar[0] && height >= *optionsVar[1])
+		else if (width == *optionsVar[0] && height <= *optionsVar[1])
 			x = 2;
-		else if (width >= *optionsVar[0] && height == *optionsVar[1])
+		else if (width <= *optionsVar[0] && height == *optionsVar[1])
 			x = 3;
 		else if (width <= *optionsVar[0] && height <= *optionsVar[1])
 			x = 4;
-		else if (width <= *optionsVar[0] && height >= *optionsVar[1])
-			x = 5;
 		else if (width >= *optionsVar[0] && height <= *optionsVar[1])
+			x = 5;
+		else if (width <= *optionsVar[0] && height >= *optionsVar[1])
 			x = 6;
 	}
 

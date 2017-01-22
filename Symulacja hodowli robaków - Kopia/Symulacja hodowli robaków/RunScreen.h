@@ -25,8 +25,6 @@ public:
 	void Update(RenderWindow &window, Event event);
 	void Draw(RenderWindow &window);
 private:
-	void updateMap();
-	FloatRect getViewPort();
 	View view;
 	Time lastUpdate;
 	Clock time;

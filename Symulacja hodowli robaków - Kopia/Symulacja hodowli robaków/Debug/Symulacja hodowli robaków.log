@@ -1,2 +1,15 @@
-﻿  Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
+﻿  MapS.cpp
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\maps.cpp(43): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\maps.cpp(215): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+  EditMapScreen.cpp
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(13): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(119): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(120): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(135): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

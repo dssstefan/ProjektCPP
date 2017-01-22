@@ -14,16 +14,14 @@ EditMapScreen::EditMapScreen()
 			i++;
 		}
 	}
-	WIDTH = SCRN_WIDTH / TILE_SIZE + 2;
-	HEIGHT = SCRN_HEIGHT / TILE_SIZE + 2;
+	WIDTH = SCRN_WIDTH / TILE_SIZE;
+	HEIGHT = SCRN_HEIGHT / TILE_SIZE;
 
 	Sprite standard(texture[0]);
 	if (MapS::GetInstace().getHeight() < HEIGHT)
 		TRUEHEIGHT = MapS::GetInstace().getHeight();
 	else
 		TRUEHEIGHT = HEIGHT;
-
-	sprite.resize(TRUEHEIGHT);
 
 	if (MapS::GetInstace().getWidth() < WIDTH)
 	{
@@ -34,11 +32,20 @@ EditMapScreen::EditMapScreen()
 		TRUEWIDTH = WIDTH;
 	}
 
-	for (int y = 0; y < TRUEHEIGHT; y++)
+	sprite.resize(MapS::GetInstace().getHeight());
+	for (int y = 0; y < MapS::GetInstace().getHeight(); y++)
 	{
-		sprite[y].resize(TRUEWIDTH, standard);
+		sprite[y].resize(MapS::GetInstace().getWidth(), standard);
 	}
 
+	for (int y = 0; y < MapS::GetInstace().getHeight(); y++)
+	{
+		for (int x = 0; x < MapS::GetInstace().getWidth(); x++)
+		{
+			sprite[y][x].setPosition(x*TILE_SIZE, y*TILE_SIZE);
+			sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[y][x].type]);
+		}
+	}
 	camera = Vector2f((MapS::GetInstace().getWidth() / 2)*TILE_SIZE, (MapS::GetInstace().getHeight() / 2)*TILE_SIZE);
 }
 
@@ -50,7 +57,13 @@ EditMapScreen::~EditMapScreen()
 void EditMapScreen::LoadContent(RenderWindow & window)
 {
 	MapS::GetInstace().updateMap();
-	updateMap();
+	if (sprite.size() < MapS::GetInstace().tileMap.size())
+	{
+		// TODO:: zrobic zmiane rozmiaru Sprite
+
+
+	}
+
 	window.setView(view);
 }
 
@@ -61,39 +74,42 @@ void EditMapScreen::UnloadContent()
 
 void EditMapScreen::Update(RenderWindow & window, Event event)
 {
+	cout << camera.x << "  " << camera.y << "      " << MapS::GetInstace().getWidth()*TILE_SIZE << endl;
 	if (event.type == Event::Closed)
 		window.close();
+
 	if (event.type == Event::KeyPressed)
 	{
 		if (event.key.code == Keyboard::Left)
 		{
 			camera.x -= TILE_SIZE;
-			if (camera.x < 0)
-				camera.x = 0;
-			view.move(-TILE_SIZE, 0);
+			if (camera.x < (TRUEWIDTH*TILE_SIZE) / 2)
+			{
+				camera.x = (TRUEWIDTH*TILE_SIZE) / 2;
+			}
 		}
 		else if (event.key.code == Keyboard::Right)
 		{
 			camera.x += TILE_SIZE;
-			if (camera.x > MapS::GetInstace().getWidth()*TILE_SIZE)
-				camera.x = MapS::GetInstace().getWidth()*TILE_SIZE;
-			view.move(TILE_SIZE, 0);
+			if (camera.x > MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2)
+				camera.x = MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2;
 		}
 		else if (event.key.code == Keyboard::Up)
 		{
 			camera.y -= TILE_SIZE;
-			if (camera.y < 0)
-				camera.y = 0;
-			view.move(0, -TILE_SIZE);
+			if (camera.y < (TRUEHEIGHT*TILE_SIZE) / 2)
+				camera.y = (TRUEHEIGHT*TILE_SIZE) / 2;
 		}
 		else if (event.key.code == Keyboard::Down)
 		{
 			camera.y += TILE_SIZE;
-			if (camera.y > MapS::GetInstace().getHeight()*TILE_SIZE)
-				camera.y = MapS::GetInstace().getHeight()*TILE_SIZE;
-			view.move(0, TILE_SIZE);
+			if (camera.y > MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2)
+				camera.y = MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2;
 		}
 	}
+	view.setCenter(camera);
+	window.setView(view);
+
 	Vector2i pixelPos = Mouse::getPosition(window);
 	Vector2f worldPos = window.mapPixelToCoords(pixelPos);
 	if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == Mouse::Left)
@@ -103,11 +119,9 @@ void EditMapScreen::Update(RenderWindow & window, Event event)
 			int x = worldPos.x / TILE_SIZE;
 			int y = worldPos.y / TILE_SIZE;
 			MapS::GetInstace().changeTile(x, y);
+			sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[y][x].type]);
 		}
 	}
-
-	updateMap();
-	window.setView(view);
 
 	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
 		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
@@ -120,86 +134,5 @@ void EditMapScreen::Draw(RenderWindow & window)
 	{
 		for (int x = 0; x < sprite[y].size(); x++)
 			window.draw(sprite[y][x]);
-	}
-}
-
-void EditMapScreen::updateMap()
-{
-	Vector2i fixed(camera.x / TILE_SIZE, camera.y / TILE_SIZE);
-	view.setCenter(fixed.x*TILE_SIZE + TILE_SIZE / 2, fixed.y*TILE_SIZE + TILE_SIZE / 2);
-
-	Vector2f min = Vector2f(view.getCenter().x - view.getSize().x / 2, view.getCenter().y - view.getSize().y / 2);
-	int leftBorder = min.x / TILE_SIZE;
-	int rightBorder = leftBorder + TRUEWIDTH - 2;
-	
-	if (min.x < 0)
-	{
-		int difference = abs(min.x);
-		min.x += difference;
-		view.move(difference, 0);
-
-		leftBorder = min.x / TILE_SIZE;
-	}
-	else if (leftBorder > 0 && rightBorder - 1 <MapS::GetInstace().getWidth() - 1)
-	{
-		min.x -= TILE_SIZE;
-		view.move(-TILE_SIZE, 0);
-		leftBorder = min.x / TILE_SIZE;
-	}
-	else if (rightBorder - 1 >= MapS::GetInstace().getWidth() - 1)
-	{
-		int difference = view.getCenter().x + view.getSize().x / 2 - (MapS::GetInstace().getWidth() - 1)*TILE_SIZE;
-
-		difference = -difference - TILE_SIZE;
-		min.x += difference;
-
-		leftBorder = min.x / TILE_SIZE;
-		view.setCenter((leftBorder + TRUEWIDTH / 2)*TILE_SIZE + TILE_SIZE, view.getCenter().y);
-	}
-	else if (leftBorder == 0)
-		view.move(-TILE_SIZE / 2, 0);
-
-	int upBorder = min.y / TILE_SIZE;
-	int bottomBorder = upBorder + TRUEHEIGHT - 2;
-
-	if (min.y < 0)
-	{
-		int difference = abs(min.y);
-		min.y += difference;
-		view.move(0, difference);
-
-		upBorder = min.y / TILE_SIZE;
-	}
-	else if (upBorder > 0 && bottomBorder - 1 < MapS::GetInstace().getHeight() - 1)
-	{
-		min.y -= TILE_SIZE;
-		view.move(0, -TILE_SIZE);
-		upBorder = min.y / TILE_SIZE;
-	}
-	else if (bottomBorder - 1 >= MapS::GetInstace().getHeight() - 1)
-	{
-		int difference = view.getCenter().y + view.getSize().y / 2 - (MapS::GetInstace().getHeight() - 1)*TILE_SIZE;
-
-		difference = -difference - TILE_SIZE;
-		min.y += difference;
-
-		upBorder = min.y / TILE_SIZE;
-		view.setCenter(view.getCenter().x, (upBorder + TRUEHEIGHT / 2)*(TILE_SIZE + 1) + TILE_SIZE);
-
-		if (bottomBorder - 1 == MapS::GetInstace().getHeight() - 1)
-			view.move(0, -TILE_SIZE / 2);
-	}
-	else if (upBorder == 0)
-		view.move(0, -TILE_SIZE / 2);
-
-	for (int y = 0, h = upBorder; y < TRUEHEIGHT; y++)
-	{
-		for (int x = 0, v = leftBorder; x < TRUEWIDTH; x++)
-		{
-			sprite[y][x].setPosition(v*TILE_SIZE, h*TILE_SIZE);
-			sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[h][v].type]);
-			v++;
-		}
-		h++;
 	}
 }
