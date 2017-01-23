@@ -1,15 +1,37 @@
-﻿  MapS.cpp
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\maps.cpp(43): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\maps.cpp(215): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-  EditMapScreen.cpp
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(13): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(119): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(120): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(133): warning C4018: '<': signed/unsigned mismatch
-c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\editmapscreen.cpp(135): warning C4018: '<': signed/unsigned mismatch
+﻿  RunScreen.cpp
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(13): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(13): warning C4244: 'argument': conversion from 'const float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(18): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(66): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(71): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(128): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(141): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(154): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(156): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(163): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(166): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(169): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(176): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(178): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(185): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(191): warning C4305: '-=': truncation from 'double' to 'float'
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(197): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(200): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(203): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(217): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(219): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(224): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(231): warning C4018: '<': signed/unsigned mismatch
+c:\projekty\projektcpp\symulacja hodowli robaków - kopia\symulacja hodowli robaków\runscreen.cpp(236): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
+  Skipping... (no relevant changes detected)
+  GameScreen.cpp
+  main.cpp
+  SettingsScreen.cpp
+  ScreenManager.cpp
+  PauseScreen.cpp
+  MenuScreen.cpp
+  EditMapScreen.cpp
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.exe
   Symulacja hodowli robaków.vcxproj -> C:\Projekty\ProjektCPP\Symulacja hodowli robaków - Kopia\Debug\Symulacja hodowli robaków.pdb (Partial PDB)

@@ -24,11 +24,9 @@ int main()
 		Event event;
 		window.pollEvent(event);
 		window.clear();
-
 		ScreenManager::GetInstance().Update(window, event);
 		ScreenManager::GetInstance().Draw(window);
 		window.display();
-
 	}
 
 	return 0;

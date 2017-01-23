@@ -45,6 +45,6 @@ private:
 	vector <Spider*> spiderInPregnacy;
 
 	UpdateSpider updatespider;
-	Food nourishment;
+	Food food;
 	Eggs eggs;
 };

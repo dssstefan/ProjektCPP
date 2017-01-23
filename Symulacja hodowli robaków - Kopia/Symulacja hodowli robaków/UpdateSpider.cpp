@@ -111,9 +111,9 @@ void UpdateSpider::checkBorderCollision(Spider& spider)
 		spider.setPosition(0, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
-	if (nextPos.x >= MapS::GetInstace().getWidth()*TILE_SIZE - 64)
+	if (nextPos.x >= MapS::GetInstace().getWidth()*TILE_SIZE - spider.getGlobalBounds().width)
 	{
-		spider.setPosition(MapS::GetInstace().getWidth()*TILE_SIZE - 64, spider.getY());
+		spider.setPosition(MapS::GetInstace().getWidth()*TILE_SIZE - spider.getGlobalBounds().width, spider.getY());
 		spider.setMovement(-movement.x, movement.y);
 	}
 	if (nextPos.y <= 0.0f)
@@ -121,9 +121,9 @@ void UpdateSpider::checkBorderCollision(Spider& spider)
 		spider.setPosition(spider.getX(), 0);
 		spider.setMovement(movement.x, -movement.y);
 	}
-	if (nextPos.y >= MapS::GetInstace().getHeight()*TILE_SIZE -64)
+	if (nextPos.y >= MapS::GetInstace().getHeight()*TILE_SIZE - spider.getGlobalBounds().height)
 	{
-		spider.setPosition(spider.getX(), MapS::GetInstace().getHeight()*TILE_SIZE - 64);
+		spider.setPosition(spider.getX(), MapS::GetInstace().getHeight()*TILE_SIZE - spider.getGlobalBounds().height);
 		spider.setMovement(movement.x, -movement.y);
 	}
 }

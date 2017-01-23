@@ -17,6 +17,8 @@ EditMapScreen::EditMapScreen()
 	WIDTH = SCRN_WIDTH / TILE_SIZE;
 	HEIGHT = SCRN_HEIGHT / TILE_SIZE;
 
+	MapS::GetInstace().updateMap();
+
 	Sprite standard(texture[0]);
 	if (MapS::GetInstace().getHeight() < HEIGHT)
 		TRUEHEIGHT = MapS::GetInstace().getHeight();
@@ -56,14 +58,6 @@ EditMapScreen::~EditMapScreen()
 
 void EditMapScreen::LoadContent(RenderWindow & window)
 {
-	MapS::GetInstace().updateMap();
-	if (sprite.size() < MapS::GetInstace().tileMap.size())
-	{
-		// TODO:: zrobic zmiane rozmiaru Sprite
-
-
-	}
-
 	window.setView(view);
 }
 
@@ -74,58 +68,59 @@ void EditMapScreen::UnloadContent()
 
 void EditMapScreen::Update(RenderWindow & window, Event event)
 {
-	cout << camera.x << "  " << camera.y << "      " << MapS::GetInstace().getWidth()*TILE_SIZE << endl;
-	if (event.type == Event::Closed)
-		window.close();
+		if (event.type == Event::Closed)
+			window.close();
 
-	if (event.type == Event::KeyPressed)
-	{
-		if (event.key.code == Keyboard::Left)
+		if (event.type == Event::KeyPressed)
 		{
-			camera.x -= TILE_SIZE;
-			if (camera.x < (TRUEWIDTH*TILE_SIZE) / 2)
+			if (event.key.code == Keyboard::Left)
 			{
-				camera.x = (TRUEWIDTH*TILE_SIZE) / 2;
+				camera.x -= TILE_SIZE;
+				if (camera.x < (TRUEWIDTH*TILE_SIZE) / 2)
+				{
+					camera.x = (TRUEWIDTH*TILE_SIZE) / 2;
+				}
+			}
+			else if (event.key.code == Keyboard::Right)
+			{
+				camera.x += TILE_SIZE;
+				if (camera.x > MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2)
+					camera.x = MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2;
+			}
+			else if (event.key.code == Keyboard::Up)
+			{
+				camera.y -= TILE_SIZE;
+				if (camera.y < (TRUEHEIGHT*TILE_SIZE) / 2)
+					camera.y = (TRUEHEIGHT*TILE_SIZE) / 2;
+			}
+			else if (event.key.code == Keyboard::Down)
+			{
+				camera.y += TILE_SIZE;
+				if (camera.y > MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2)
+					camera.y = MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2;
 			}
 		}
-		else if (event.key.code == Keyboard::Right)
-		{
-			camera.x += TILE_SIZE;
-			if (camera.x > MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2)
-				camera.x = MapS::GetInstace().getWidth()*TILE_SIZE - (TRUEWIDTH*TILE_SIZE) / 2;
-		}
-		else if (event.key.code == Keyboard::Up)
-		{
-			camera.y -= TILE_SIZE;
-			if (camera.y < (TRUEHEIGHT*TILE_SIZE) / 2)
-				camera.y = (TRUEHEIGHT*TILE_SIZE) / 2;
-		}
-		else if (event.key.code == Keyboard::Down)
-		{
-			camera.y += TILE_SIZE;
-			if (camera.y > MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2)
-				camera.y = MapS::GetInstace().getHeight()*TILE_SIZE - (TRUEHEIGHT*TILE_SIZE) / 2;
-		}
-	}
-	view.setCenter(camera);
-	window.setView(view);
+		
+		view.setCenter(camera);
+		window.setView(view);
 
-	Vector2i pixelPos = Mouse::getPosition(window);
-	Vector2f worldPos = window.mapPixelToCoords(pixelPos);
-	if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == Mouse::Left)
-	{
-		if (window.waitEvent(event) && event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
+		Vector2i pixelPos = Mouse::getPosition(window);
+		Vector2f worldPos = window.mapPixelToCoords(pixelPos);
+		if (event.type == Event::MouseButtonPressed  && event.mouseButton.button == Mouse::Left)
 		{
-			int x = worldPos.x / TILE_SIZE;
-			int y = worldPos.y / TILE_SIZE;
-			MapS::GetInstace().changeTile(x, y);
-			sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[y][x].type]);
+			if (window.waitEvent(event) && event.type == Event::MouseButtonReleased && event.mouseButton.button == Mouse::Left)
+			{
+				int x = worldPos.x / TILE_SIZE;
+				int y = worldPos.y / TILE_SIZE;
+				MapS::GetInstace().changeTile(x, y);
+				sprite[y][x].setTexture(texture[MapS::GetInstace().tileMap[y][x].type]);
+			}
 		}
-	}
 
-	if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
-		if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
-			ScreenManager::GetInstance().AddScreen(new SettingsScreen, window);
+		if (event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+			if (window.waitEvent(event) && event.type == Event::KeyReleased && event.key.code == Keyboard::Escape)
+				ScreenManager::GetInstance().AddScreen(new SettingsScreen, window);
+
 }
 
 void EditMapScreen::Draw(RenderWindow & window)

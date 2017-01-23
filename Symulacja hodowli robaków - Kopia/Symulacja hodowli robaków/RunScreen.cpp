@@ -1,6 +1,6 @@
 #include "RunScreen.h"
 
-RunScreen::RunScreen() :updatespider(100.0f)
+RunScreen::RunScreen() :updatespider(10.0f)
 {
 	push = 0.0f;
 	view.setSize(SCRN_WIDTH, SCRN_HEIGHT);
@@ -50,7 +50,7 @@ RunScreen::RunScreen() :updatespider(100.0f)
 	}
 	camera = Vector2f((MapS::GetInstace().getWidth() / 2)*TILE_SIZE, (MapS::GetInstace().getHeight() / 2)*TILE_SIZE);
 	createSpiders.createSpiders(spiderM, spiderF, MapS::GetInstace().getWidth()-1, MapS::GetInstace().getHeight()-1);
-	nourishment.generateFood();
+	food.generateFood();
 }
 
 
@@ -82,7 +82,6 @@ void RunScreen::UnloadContent()
 
 void RunScreen::Update(RenderWindow & window, Event event)
 {
-	cout << camera.x << "  " << camera.y << "      "<< MapS::GetInstace().getWidth()*TILE_SIZE <<endl;
 	if (event.type == Event::Closed)
 		window.close();
 	
@@ -123,7 +122,7 @@ void RunScreen::Update(RenderWindow & window, Event event)
 	updatespider.update(spiderF, deadSpider, deltaTime);
 
 	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
-	nourishment.update(deltaTime);
+	food.update(deltaTime);
 
 	deltaTime = time.getElapsedTime().asSeconds() - lastUpdate.asSeconds();
 	for (int i = 0; i < spiderInPregnacy.size(); i++)
@@ -161,11 +160,7 @@ void RunScreen::Update(RenderWindow & window, Event event)
 			}
 			spiderM[i].getCollider().CheckCollision(spiderM[j].getCollider(), 0.0f);
 		}
-		/*for (int j = 0; j < spiderF.size(); j++)
-		{
-			spiderM[i].getCollider().CheckCollision(spiderF[j].getCollider(), 0.0f);
-		}*/
-		int eat = nourishment.isEating(spiderM[i], *optionsVar[5]);
+		int eat = food.isEating(spiderM[i], *optionsVar[5]);
 		if (eat > 0)
 		{
 			spiderM[i].hp = *optionsVar[4];
@@ -199,7 +194,7 @@ void RunScreen::Update(RenderWindow & window, Event event)
 				}
 			}
 		}
-		int eat = nourishment.isEating(spiderF[i], *optionsVar[5]);
+		int eat = food.isEating(spiderF[i], *optionsVar[5]);
 		if (eat > 0)
 		{
 			spiderF[i].hp = *optionsVar[4];
@@ -224,7 +219,7 @@ void RunScreen::Draw(RenderWindow & window)
 		for (int x = 0; x < sprite[y].size(); x++)
 			window.draw(sprite[y][x]);
 	}
-	nourishment.draw(window);
+	food.draw(window);
 
 	for (int i = 0; i < deadSpider.size(); i++)
 	{
